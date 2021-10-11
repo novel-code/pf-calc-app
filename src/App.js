@@ -37,13 +37,16 @@ const addEmployee = (employee) => {
   const id = Math.floor(Math.random() * 10000) + 1;
   const newEmployee = { 
     id: id,
-    employeeName: employee.text,
+    employeeName: employee.empName,
     gender: employee.gender,
-    designation: employee.designation
+    doj: employee.dateOfJoin,
+    designation: employee.designation,
+    ctc: employee.ctc
   }
 
   setEmployees([...EmployeesData, newEmployee])
 
+  console.log(EmployeesData)
 }
 
   return (
@@ -56,7 +59,7 @@ const addEmployee = (employee) => {
         setShowAddEmployeeComponent(false)
         setShowEmpList(true);
       }}/>
-      {showAddEmployeeComponent && <AddEmployee onAdd={addEmployee}/>}
+      {showAddEmployeeComponent &&<div className="formBg"> <AddEmployee onAdd={addEmployee}/></div>}
       {showEmpList && <Employees employees={EmployeesData} />}
       
     </div>
