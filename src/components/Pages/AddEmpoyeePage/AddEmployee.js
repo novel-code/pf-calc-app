@@ -1,12 +1,14 @@
 
+import moment from "moment";
 
 import { useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import DatePicker from "react-date-picker";
-
+import Popup from "../../Navbar/Popup";
+import { postEmployee } from "../../Requests/PostEmployee";
 import styles from "./AddEmployee.module.css";
 
-const AddEmployee = ({ onAdd }) => {
+const AddEmployee = ({ onAdd, submitPopup }) => {
   const [empName, setText] = useState("");
   const [checked, setChecked] = useState(false);
   const [dateOfJoin, setDateOfJoin] = useState("");
@@ -19,6 +21,7 @@ const AddEmployee = ({ onAdd }) => {
   const [dojMessage, setDojMessage] = useState("")
   const [designationMessage, setDesignationMessage] = useState("")
   const [ctcMessage, setCtcMessage] = useState("")
+  
 
   //   const [designation, setDesignation] = useState("");
   //   const [gender, setGender] = useState("");
@@ -48,6 +51,21 @@ const AddEmployee = ({ onAdd }) => {
 
     console.log(ctc);
 
+    const formDate = moment(dateOfJoin).format(
+      "yy-MM-DD"
+    );
+
+    const postEmpObj = {
+      "employee_name": `${empName}`,
+      "gender": `${empGender.charAt(0)}`,
+    "date_of_joining": `${formDate}`,
+      "designation": `${designation}`,
+      "ctc": `${ctc}`,
+      "esi": `${pf}`,
+      "pf": `${esi}`,
+      "tax": `${tax}`
+    }
+
     onAdd({
       empName,
       gender: [empGender, checked],
@@ -59,6 +77,36 @@ const AddEmployee = ({ onAdd }) => {
       tax,
     });
 
+    // const renderPopup = function (popupMsg) {
+    //   return(<Popup msg={popupMsg}></Popup>)
+    // }
+
+    const postPromise  =  postEmployee(postEmpObj)
+
+     postPromise.then(function () {
+       
+      const popupMsg = "Successfully saved employee record"
+
+      console.log(popupMsg +' call back')
+
+      submitPopup({
+        show: true,
+        message: popupMsg,
+      })
+      
+    }).catch(function (error) {
+      
+      const popupMsg = "failed"
+
+      console.log(popupMsg + "call back")
+
+      submitPopup({
+        show: true,
+        message: popupMsg,
+      })
+      
+    });
+    
     setText("");
   };
 
@@ -117,6 +165,7 @@ const AddEmployee = ({ onAdd }) => {
 
   return (
     <div className={styles.formBg}>
+      
       <div className={styles.formStyle2}>
         <div className="row">
           <div className="col-lg-8 col-md-12">
@@ -264,7 +313,6 @@ const AddEmployee = ({ onAdd }) => {
               {/* <div className="d-flex  flex-column"> */}
             </form>
           </div>
-
           <div className="col-lg-4">
             <h6>
               PF:{" "}
@@ -287,6 +335,8 @@ const AddEmployee = ({ onAdd }) => {
           </div>
         </div>
       </div>
+      
+
     </div>
   );
 };

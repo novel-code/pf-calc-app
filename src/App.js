@@ -5,6 +5,8 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Employees from './components/Pages/EmployeeListPage/Employees/Employees';
 import AddEmployee from "./components/Pages/AddEmpoyeePage/AddEmployee";
+import Popup from "./components/Navbar/Popup";
+
 
 
 function App() {
@@ -32,10 +34,11 @@ function App() {
 ]);
 
 // Add Employee page
+let newEmployee;
 const addEmployee = (employee) => {
 
   const id = Math.floor(Math.random() * 10000) + 1;
-  const newEmployee = { 
+  newEmployee = { 
     id: id,
     employeeName: employee.empName,
     gender: employee.gender,
@@ -44,12 +47,21 @@ const addEmployee = (employee) => {
     ctc: employee.ctc
   }
 
-  console.log(newEmployee)
+  // console.log(newEmployee)
 
   setEmployees([...EmployeesData, newEmployee])
 
   
 }
+
+const show = function (popupObj) {
+
+  
+  return ( <Popup message={popupObj.message} show={popupObj.show}></Popup>)
+}
+
+
+
 
   return (
   
@@ -61,8 +73,10 @@ const addEmployee = (employee) => {
         setShowAddEmployeeComponent(false)
         setShowEmpList(true);
       }}/>
-      {showAddEmployeeComponent &&<div className="formBg"> <AddEmployee onAdd={addEmployee}/></div>}
+      {showAddEmployeeComponent &&<div className="formBg"> <AddEmployee submitPopup={show} onAdd={addEmployee}/></div>}
       {showEmpList && <Employees employees={EmployeesData} />}
+      <Popup sucMsg="succe added record" failMsg="failed to add record"></Popup>
+     
       
     </div>
     
