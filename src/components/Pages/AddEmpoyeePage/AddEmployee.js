@@ -163,9 +163,9 @@ const AddEmployee = ({ onAdd }) => {
     <div className={styles.formBg}>
       
       <div className={styles.formStyle2}>
+            <form className={styles.formAdd}>
         <div className="row">
           <div className="col-lg-8 col-md-12">
-            <form className={styles.formAdd}>
               <div>
                 <div>
                   <h3>Employee PF Calculator</h3>
@@ -309,9 +309,8 @@ const AddEmployee = ({ onAdd }) => {
                 </div>
               </div>
               {/* <div className="d-flex  flex-column"> */}
-            </form>
           </div>
-          <div className="col-lg-4">
+          <div className="col-lg-4 d-flex flex-column align-items-end">
             <h6>
               PF:{" "}
               <span className="pfOutput" id="dbPF">
@@ -332,6 +331,10 @@ const AddEmployee = ({ onAdd }) => {
             </h6>
           </div>
         </div>
+            </form>
+           
+          
+       
       </div>
       
       {popup ? <Popup sucOrFailMsg={popMsg} logic={() =>setPopup(false)}></Popup> : ""}
