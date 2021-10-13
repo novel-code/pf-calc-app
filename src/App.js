@@ -39,14 +39,16 @@ const addEmployee = (employee) => {
     id: id,
     employeeName: employee.empName,
     gender: employee.gender,
-    doj: employee.dateOfJoin,
+    dateOfJoin: employee.dateOfJoin,
     designation: employee.designation,
     ctc: employee.ctc
   }
 
+  console.log(newEmployee)
+
   setEmployees([...EmployeesData, newEmployee])
 
-  console.log(EmployeesData)
+  
 }
 
   return (

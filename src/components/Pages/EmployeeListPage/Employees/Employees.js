@@ -3,6 +3,9 @@ import Employee from "../../../Employee/Employee";
 const Employees = (props) => {
 
     
+    
+    
+    
 
     return (
         // setEmployees([...EmployeesData, ])
@@ -14,6 +17,8 @@ const Employees = (props) => {
                 <div className="col">Name:</div>
                 <div className="col">Designation:</div>
                 <div className="col">Gender:</div>
+                <div className="col">Date of Join:</div>
+                <div className="col">Ctc:</div>
 
                
 

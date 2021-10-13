@@ -1,3 +1,5 @@
+import moment from "moment";
+
 const Employee = ({ employee }) => {
 
     const oddEvenCheck = function(emp) {
@@ -25,6 +27,13 @@ const Employee = ({ employee }) => {
 
             <div className="col">
                 <p>{employee.gender}</p>
+            </div>
+            <div className="col">
+                <p>{moment(employee.dateOfJoin).format("yy-MM-DD")}</p>
+            </div>
+
+            <div className="col">
+                <p>{employee.ctc}</p>
             </div>
 
         </div>
