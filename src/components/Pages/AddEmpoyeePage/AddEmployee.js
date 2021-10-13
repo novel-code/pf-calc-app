@@ -334,7 +334,7 @@ const AddEmployee = ({ onAdd }) => {
         </div>
       </div>
       
-      {popup ? <Popup sucOfFailMsg={popMsg} logic={() =>setPopup(false)}></Popup> : ""}
+      {popup ? <Popup sucOrFailMsg={popMsg} logic={() =>setPopup(false)}></Popup> : ""}
 
 
     </div>

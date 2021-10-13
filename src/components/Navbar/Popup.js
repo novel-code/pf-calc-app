@@ -1,9 +1,6 @@
 import styles from './popup.module.css';
 
-const Popup = function ({logic, sucOfFailMsg} ) {
-    
-
-    
+const Popup = function ({logic, sucOrFailMsg} ) {
     
     return (
             
@@ -11,7 +8,7 @@ const Popup = function ({logic, sucOfFailMsg} ) {
 
 
         <div className={styles.modalContent}>
-          <p>{sucOfFailMsg}</p>
+          <p>{sucOrFailMsg}</p>
           <p><button onClick={logic} className={styles.close}>OK</button></p>
         </div>
     
