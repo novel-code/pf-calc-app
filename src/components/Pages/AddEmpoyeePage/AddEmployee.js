@@ -5,10 +5,11 @@ import { useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import DatePicker from "react-date-picker";
 import Popup from "../../Navbar/Popup";
+
 import { postEmployee } from "../../Requests/PostEmployee";
 import styles from "./AddEmployee.module.css";
 
-const AddEmployee = ({ onAdd, submitPopup }) => {
+const AddEmployee = ({ onAdd }) => {
   const [empName, setText] = useState("");
   const [checked, setChecked] = useState(false);
   const [dateOfJoin, setDateOfJoin] = useState("");
@@ -21,11 +22,12 @@ const AddEmployee = ({ onAdd, submitPopup }) => {
   const [dojMessage, setDojMessage] = useState("")
   const [designationMessage, setDesignationMessage] = useState("")
   const [ctcMessage, setCtcMessage] = useState("")
+
+  const [popup , setPopup] = useState(false);
+
+  const [popMsg, setPopMsg] = useState("")
   
-
-  //   const [designation, setDesignation] = useState("");
-  //   const [gender, setGender] = useState("");
-
+  
   const onSubmitHandler = function (e) {
     e.preventDefault();
 
@@ -55,6 +57,10 @@ const AddEmployee = ({ onAdd, submitPopup }) => {
       "yy-MM-DD"
     );
 
+    const formTax = isNaN(tax) ? 0 : tax;
+    
+    
+
     const postEmpObj = {
       "employee_name": `${empName}`,
       "gender": `${empGender.charAt(0)}`,
@@ -63,7 +69,7 @@ const AddEmployee = ({ onAdd, submitPopup }) => {
       "ctc": `${ctc}`,
       "esi": `${pf}`,
       "pf": `${esi}`,
-      "tax": `${tax}`
+      "tax": `${formTax}`
     }
 
     onAdd({
@@ -77,33 +83,23 @@ const AddEmployee = ({ onAdd, submitPopup }) => {
       tax,
     });
 
-    // const renderPopup = function (popupMsg) {
-    //   return(<Popup msg={popupMsg}></Popup>)
-    // }
 
     const postPromise  =  postEmployee(postEmpObj)
 
-     postPromise.then(function () {
+   postPromise.then(function () {
        
-      const popupMsg = "Successfully saved employee record"
+     setPopMsg("Employee Record added successfully!")
 
-      console.log(popupMsg +' call back')
+      setPopup(true)
 
-      submitPopup({
-        show: true,
-        message: popupMsg,
-      })
       
     }).catch(function (error) {
       
-      const popupMsg = "failed"
+      setPopMsg("Oops! Something went wrong.")
 
-      console.log(popupMsg + "call back")
+      setPopup(true)
 
-      submitPopup({
-        show: true,
-        message: popupMsg,
-      })
+
       
     });
     
@@ -294,10 +290,12 @@ const AddEmployee = ({ onAdd, submitPopup }) => {
                       if(dateOfJoin === "") {
                         setDojMessage("please select a date")
                       }
+                      
 
                       // if (designation === "none") return;
 
                       if (empName.length > 2 && (dateOfJoin !== "") && designation !== "none" && ctc > 50000) {
+                       
                         onSubmitHandler(e);
                         setDesignation("none");
                         setCtc("")
@@ -336,6 +334,8 @@ const AddEmployee = ({ onAdd, submitPopup }) => {
         </div>
       </div>
       
+      {popup ? <Popup sucOfFailMsg={popMsg} logic={() =>setPopup(false)}></Popup> : ""}
+
 
     </div>
   );

@@ -5,7 +5,7 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Employees from './components/Pages/EmployeeListPage/Employees/Employees';
 import AddEmployee from "./components/Pages/AddEmpoyeePage/AddEmployee";
-import Popup from "./components/Navbar/Popup";
+
 
 
 
@@ -44,21 +44,21 @@ const addEmployee = (employee) => {
     gender: employee.gender,
     dateOfJoin: employee.dateOfJoin,
     designation: employee.designation,
-    ctc: employee.ctc
+    ctc: employee.ctc,
+    pf: employee.pf,
+    esi: employee.esi,
+    tax: employee.tax
   }
 
   // console.log(newEmployee)
 
   setEmployees([...EmployeesData, newEmployee])
 
+  console.log(newEmployee)
   
 }
 
-const show = function (popupObj) {
 
-  
-  return ( <Popup message={popupObj.message} show={popupObj.show}></Popup>)
-}
 
 
 
@@ -73,9 +73,9 @@ const show = function (popupObj) {
         setShowAddEmployeeComponent(false)
         setShowEmpList(true);
       }}/>
-      {showAddEmployeeComponent &&<div className="formBg"> <AddEmployee submitPopup={show} onAdd={addEmployee}/></div>}
+      {showAddEmployeeComponent &&<div className="formBg"> <AddEmployee onAdd={addEmployee}/></div>}
       {showEmpList && <Employees employees={EmployeesData} />}
-      <Popup sucMsg="succe added record" failMsg="failed to add record"></Popup>
+      
      
       
     </div>
