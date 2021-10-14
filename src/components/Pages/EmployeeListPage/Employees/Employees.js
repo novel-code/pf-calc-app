@@ -1,10 +1,11 @@
 import Employee from "../../../Employee/Employee";
+import { getAllEmployees } from "../../../Requests/getAllEmployees";
 
 const Employees = (props) => {
 
     
     
-    
+    getAllEmployees()
     
 
     return (

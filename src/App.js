@@ -5,6 +5,7 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Employees from './components/Pages/EmployeeListPage/Employees/Employees';
 import AddEmployee from "./components/Pages/AddEmpoyeePage/AddEmployee";
+import { DbEmployees } from "./components/DataTable/DbEmployees";
 
 
 
@@ -75,7 +76,7 @@ const addEmployee = (employee) => {
       }}/>
       {showAddEmployeeComponent &&<div className="formBg"> <AddEmployee onAdd={addEmployee}/></div>}
       {showEmpList && <Employees employees={EmployeesData} />}
-      
+      <DbEmployees></DbEmployees>
      
       
     </div>
