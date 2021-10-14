@@ -76,6 +76,8 @@ export const DbEmployees = function(props) {
     useEffect(() => {
         fetchEmployees()
     }, [])
+
+    const isEven = (idx) => idx % 2 === 0;
     
     return (
         <table {...getTableBodyProps()}>
@@ -91,10 +93,10 @@ export const DbEmployees = function(props) {
             </thead>
             <tbody {...getTableBodyProps()}>
             
-                {rows.map((row) => {
+                {rows.map((row, idx) => {
                     prepareRow(row);
 
-                    return <tr {...row.getRowProps()} >
+                    return <tr {...row.getRowProps()} className={isEven(idx) ? "evenRowColor": ""} >
 
 {row.cells.map((cell, idx) => (
                         <td {...cell.getCellProps()}>{cell.render("Cell")}</td>

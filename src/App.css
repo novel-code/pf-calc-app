@@ -55,3 +55,11 @@
 
 
 }
+
+.evenRowColor {
+  background-color: rgb(209, 243, 255);
+}
+
+.oddRowColor {
+  background-color: rgb(173, 173, 240);
+}
