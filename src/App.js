@@ -76,7 +76,7 @@ const addEmployee = (employee) => {
       }}/>
       {showAddEmployeeComponent &&<div className="formBg"> <AddEmployee onAdd={addEmployee}/></div>}
       {showEmpList && <Employees employees={EmployeesData} />}
-      <DbEmployees></DbEmployees>
+      
      
       
     </div>

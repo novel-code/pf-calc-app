@@ -1,3 +1,4 @@
+import { DbEmployees } from "../../../DataTable/DbEmployees";
 import Employee from "../../../Employee/Employee";
 import { getAllEmployees } from "../../../Requests/getAllEmployees";
 
@@ -28,6 +29,7 @@ const Employees = (props) => {
         {props.employees.map(emp => <Employee key={emp.id} employee={emp} />)}
 
             </div>
+            <DbEmployees></DbEmployees>
         
         </div>
     )
