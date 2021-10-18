@@ -1,11 +1,25 @@
 import axios from "axios";
 import moment from "moment";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Row } from "react-bootstrap";
 import { useTable } from "react-table";
+import Popup from "../Navbar/Popup";
+import AddEmployee from "../Pages/AddEmpoyeePage/AddEmployee";
+import { EditFormBtn } from "../Pages/EmployeeListPage/Employees/EditFormBtn";
 import styles from "./dbEmployees.module.css";
 
 export const DbEmployees = function (props) {
+
+
+const [popup , setPopup] = useState(false);
+const [popMsg, setPopMsg] = useState("");
+const [idDel, setIdDel] = useState("");
+
+
+
   const [dbEmployees, setDbEmployees] = useState([]);
+  const [toEditObj, setToEditObj] = useState({})
+  
 
   const fetchEmployees = async () => {
     const response = await axios
@@ -18,10 +32,11 @@ export const DbEmployees = function (props) {
     //   console.log("Employees:", dbEmployees);
       setDbEmployees(dbEmployees);
     }
+    
   };
 
   // every single render, if the data didn't change from previous render then it will be cached
-  const employeesData = useMemo(() => [...dbEmployees, [dbEmployees]]);
+  const employeesData = useMemo(() => [...dbEmployees, dbEmployees]);
 
   const columns = useMemo(
     () => [
@@ -58,10 +73,15 @@ export const DbEmployees = function (props) {
       },
       {
         Header: "Action",
-        Cell: () => (
+        Cell: (col) => (
           <div>
-            <button className="btn btn-primary mx-2">Edit</button>
-            <button className="btn btn-danger">Delete</button>
+            <EditFormBtn toEditData={col.row.original} ></EditFormBtn>
+            <button onClick={() => {
+                      setPopMsg(`Are you sure you want to delete ${col.row.original.employee_name}?`)
+                      setPopup(true);
+                      setIdDel(col.row.original.id)
+                      
+            } }  className="btn btn-danger">Delete</button>
           </div>
         ),
       },
@@ -76,10 +96,13 @@ export const DbEmployees = function (props) {
 
   // after the component has been mounted this fn will run
   useEffect(() => {
-    fetchEmployees();
+      
+    fetchEmployees()
+    
   }, []);
 
   return (
+      <>
     <table className={styles.tableDb} {...getTableBodyProps()}>
       <thead>
         {headerGroups.map((headerGroup) => (
@@ -108,6 +131,10 @@ export const DbEmployees = function (props) {
           );
         })}
       </tbody>
+      {console.log("rendering")}
     </table>
+    {popup ? <Popup sucOrFailMsg={popMsg} cancelBtn={true} logic={() =>setPopup(false)} id={idDel}></Popup> : ""}
+ 
+    </>
   );
 };

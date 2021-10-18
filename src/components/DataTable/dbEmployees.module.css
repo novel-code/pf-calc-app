@@ -12,17 +12,20 @@
 }
 
 .tableHeadDb {
+    
+    text-align: center;
     height: 50px;
     border-bottom: solid 1px black;
     background-color: rgb(117, 186, 241);
 }
 
 .tableRowDb {
-    
+    text-align: center;
     height: 50px;
 }
 
 .tableDb {
+    
     width: 90%;
     margin-left: 5%;
 }

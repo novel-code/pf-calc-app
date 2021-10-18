@@ -226,7 +226,7 @@ const AddEmployee = ({ onAdd }) => {
                   <DatePicker
                     maxDate={new Date()}
                     id="doj"
-                    
+                    dayPlaceholder="DD" monthPlaceholder="MM" yearPlaceholder="YYY"
                     value={dateOfJoin}
                     onChange={(dateOfJoin) => {
                       setDojMessage("")
