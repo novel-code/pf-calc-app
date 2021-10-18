@@ -5,7 +5,6 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Employees from './components/Pages/EmployeeListPage/Employees/Employees';
 import AddEmployee from "./components/Pages/AddEmpoyeePage/AddEmployee";
-import { DbEmployees } from "./components/DataTable/DbEmployees";
 
 
 
@@ -67,6 +66,8 @@ const addEmployee = (employee) => {
   return (
   
     <div className="App">
+      
+
       <Navbar btnShowActive={showAddEmployeeComponent} onAdd={() => {
         setShowAddEmployeeComponent(true);
         setShowEmpList(false)
