@@ -6,19 +6,21 @@ import { useTable } from "react-table";
 import Popup from "../Navbar/Popup";
 import AddEmployee from "../Pages/AddEmpoyeePage/AddEmployee";
 import { EditFormBtn } from "../Pages/EmployeeListPage/Employees/EditFormBtn";
+import Employees from "../Pages/EmployeeListPage/Employees/Employees";
 import styles from "./dbEmployees.module.css";
+import { deleteEmpFlag } from '../Requests/DeleteEmpFlag';
 
-export const DbEmployees = function (props) {
+
+export const DbEmployees = function () {
 
 
 const [popup , setPopup] = useState(false);
 const [popMsg, setPopMsg] = useState("");
-const [idDel, setIdDel] = useState("");
 
 
 
   const [dbEmployees, setDbEmployees] = useState([]);
-  const [toEditObj, setToEditObj] = useState({})
+  const [idDel, setIdDel] = useState();
   
 
   const fetchEmployees = async () => {
@@ -29,11 +31,13 @@ const [idDel, setIdDel] = useState("");
     if (response) {
       const dbEmployees = response.data;
 
-    //   console.log("Employees:", dbEmployees);
-      setDbEmployees(dbEmployees);
+      console.log("Employees:", dbEmployees);
+    setDbEmployees(dbEmployees);
+
     }
     
   };
+
 
   // every single render, if the data didn't change from previous render then it will be cached
   const employeesData = useMemo(() => [...dbEmployees, dbEmployees]);
@@ -86,7 +90,7 @@ const [idDel, setIdDel] = useState("");
         ),
       },
     ],
-    []
+    [dbEmployees]
   );
 
   const tableInstance = useTable({ columns: columns, data: employeesData });
@@ -95,10 +99,12 @@ const [idDel, setIdDel] = useState("");
     tableInstance;
 
   // after the component has been mounted this fn will run
+
   useEffect(() => {
       
     fetchEmployees()
-    
+
+
   }, []);
 
   return (
@@ -134,7 +140,6 @@ const [idDel, setIdDel] = useState("");
       {console.log("rendering")}
     </table>
     {popup ? <Popup sucOrFailMsg={popMsg} cancelBtn={true} logic={() =>setPopup(false)} id={idDel}></Popup> : ""}
- 
     </>
   );
 };

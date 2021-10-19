@@ -1,9 +1,11 @@
+import { useState } from 'react';
+import { DbEmployees } from '../DataTable/DbEmployees';
+import Employees from '../Pages/EmployeeListPage/Employees/Employees';
 import { deleteEmpFlag } from '../Requests/DeleteEmpFlag';
 import styles from './popup.module.css';
 
 const Popup = function ({logic, sucOrFailMsg, cancelBtn, id} ) {
 
-  
     
     return (
             
@@ -14,7 +16,7 @@ const Popup = function ({logic, sucOrFailMsg, cancelBtn, id} ) {
           <p>{sucOrFailMsg}</p>
           <div >
 
-          <p ><button onClick={() => {
+          <p><button onClick={() => {
             if(!cancelBtn) {
               logic()
             } else {
@@ -31,7 +33,6 @@ const Popup = function ({logic, sucOrFailMsg, cancelBtn, id} ) {
 
 
         </div>
-    
       </div>
 
     )

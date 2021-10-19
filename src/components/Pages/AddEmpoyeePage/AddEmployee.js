@@ -1,7 +1,7 @@
 
 import moment from "moment";
 
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import DatePicker from "react-date-picker";
 import Popup from "../../Navbar/Popup";
@@ -129,15 +129,13 @@ const AddEmployee = ({ onAdd }) => {
     const nameVal = e.target.value.replace(/[^a-z A-Z]/gi, "");
 
     if (nameVal.length > 25) return;
+    setNameMessage("");
 
     setText(nameVal);
 
-    if (nameVal.length < 3) {
-      setNameMessage("name should be alteast 3 charecters long");
-    } else {
-      setNameMessage("");
-    }
+ 
   };
+
 
   const pfAndEsiCalc = function (value) {
     const onePercent = value / 100;
@@ -159,6 +157,11 @@ const AddEmployee = ({ onAdd }) => {
     }
   };
 
+  const validDateInput = function(e) {
+    e.target.value = ""
+  }
+
+
   return (
     <div className={styles.formBg}>
       
@@ -179,7 +182,7 @@ const AddEmployee = ({ onAdd }) => {
                     onInput={allowName}
                   ></input>
                 </div>
-                <div>{nameMessage}</div>
+                <div style={{color:"red"}}>{nameMessage}</div>
                 <fieldset>
                   <Form.Group className="mb-3">
                     <Row lg={6} md={6} sm={8}>
@@ -224,17 +227,19 @@ const AddEmployee = ({ onAdd }) => {
                 <div>
                   <label>Date of Joining:</label>
                   <DatePicker
+                    onInput={(e) => validDateInput(e)}
                     maxDate={new Date()}
                     id="doj"
                     dayPlaceholder="DD" monthPlaceholder="MM" yearPlaceholder="YYY"
                     value={dateOfJoin}
                     onChange={(dateOfJoin) => {
+                      console.log(dateOfJoin)
                       setDojMessage("")
                       setDateOfJoin(dateOfJoin)
                     }}
                     className="mx-3"
                   ></DatePicker>
-                  <div>{dojMessage}</div>
+                  <div style={{color:"red"}}>{dojMessage}</div>
                 </div>
                 <div className="mt-3">
                   <label>Designation:</label>
@@ -258,7 +263,7 @@ const AddEmployee = ({ onAdd }) => {
                     <option value="Cyber Security">Cyber Security</option>
                     <option value="Dev Ops">Dev Ops</option>
                   </Form.Select>
-                  <div>{designationMessage}</div>
+                  <div style={{color:"red"}}>{designationMessage}</div>
                 </div>
                 <div className="mt-3">
                   <label className="form-label">CTC per year:</label>
@@ -270,7 +275,7 @@ const AddEmployee = ({ onAdd }) => {
                     type="text"
                     className="form-control"
                   ></input>
-                  <div>{ctcMessage}</div>
+                  <div style={{color:"red"}}>{ctcMessage}</div>
                 </div>
                 <div className="d-flex justify-content-around">
                   <button
@@ -278,6 +283,10 @@ const AddEmployee = ({ onAdd }) => {
                     type="submit"
                     onClick={(e) => {
                       e.preventDefault();
+
+                      if (empName.length < 3) {
+                        setNameMessage("name should be alteast 3 charecters long");
+                      } 
 
                       if (ctc < 50000) {
                         setCtcMessage("Ctc should be greater than 50000")
@@ -297,6 +306,7 @@ const AddEmployee = ({ onAdd }) => {
                       if (empName.length > 2 && (dateOfJoin !== "") && designation !== "none" && ctc > 50000) {
                        
                         onSubmitHandler(e);
+                        setNameMessage("");
                         setDesignation("none");
                         setCtc("")
                         setDateOfJoin("")

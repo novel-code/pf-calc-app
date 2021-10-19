@@ -5,6 +5,8 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Employees from './components/Pages/EmployeeListPage/Employees/Employees';
 import AddEmployee from "./components/Pages/AddEmpoyeePage/AddEmployee";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Popup from "./components/Navbar/Popup";
 
 
 
@@ -12,6 +14,7 @@ import AddEmployee from "./components/Pages/AddEmpoyeePage/AddEmployee";
 function App() {
   const [showAddEmployeeComponent, setShowAddEmployeeComponent] = useState(true);
   const [showEmpList, setShowEmpList] = useState(false);
+  const [fetchData, setFetchData] = useState(false)
   const [EmployeesData, setEmployees] = useState([
     {
         id: 1,
@@ -59,24 +62,25 @@ const addEmployee = (employee) => {
 }
 
 
-
-
-
-
   return (
   
     <div className="App">
+      <BrowserRouter>
+      <Navbar  />
+      <Switch>
+
+        <Route path="/add"  component={() => <AddEmployee onAdd={addEmployee} ></AddEmployee>}>
+
+        </Route>
+          <Route path="/list" component={() => <Employees  ></Employees>}></Route>
+      </Switch>
+      
+      </BrowserRouter>
       
 
-      <Navbar btnShowActive={showAddEmployeeComponent} onAdd={() => {
-        setShowAddEmployeeComponent(true);
-        setShowEmpList(false)
-      }}  onEmpList={() => {
-        setShowAddEmployeeComponent(false)
-        setShowEmpList(true);
-      }}/>
-      {showAddEmployeeComponent &&<div className="formBg"> <AddEmployee onAdd={addEmployee}/></div>}
-      {showEmpList && <Employees employees={EmployeesData} />}
+     
+      {/* {showAddEmployeeComponent &&<div className="formBg"> <AddEmployee onAdd={addEmployee}/></div>} */}
+      {/* {showEmpList && <Employees employees={EmployeesData} />} */}
       
      
       

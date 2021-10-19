@@ -1,7 +1,7 @@
 import { DbEmployees } from "../../../DataTable/DbEmployees";
 // import Employee from "../../../Employee/Employee";
 
-const Employees = (props) => {
+const Employees = () => {
 
     
     
@@ -16,7 +16,7 @@ const Employees = (props) => {
             <div>
         {/* {props.employees.map(emp => <Employee key={emp.id} employee={emp} />)} */}
 
-            <DbEmployees></DbEmployees>
+            <DbEmployees ></DbEmployees>
             </div>
         
         </div>
