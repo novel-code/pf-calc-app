@@ -123,8 +123,9 @@ export const DbEmployees = function () {
   }, []);
 
   return (
-    <>
-      <table className={styles.tableDb} {...getTableBodyProps()}>
+    <div style={{width: "100%"}}>
+      <div style={{width: "100%"}}>
+      <table style={{width: "100%"}} {...getTableBodyProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr
@@ -189,16 +190,7 @@ export const DbEmployees = function () {
       ) : (
         ""
       )}
-      {popup ? (
-        <Popup
-          sucOrFailMsg={popMsg}
-          cancelBtn={true}
-          logic={() => setPopup(false)}
-          id={idDel}
-        ></Popup>
-      ) : (
-        ""
-      )}
-    </>
+      </div>
+    </div>
   );
 };

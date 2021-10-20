@@ -4,6 +4,7 @@
     margin-left: auto;
     margin-top: 4%;
     margin-bottom: 2%;
+    
 }
 
 .formStyle2 {
@@ -18,14 +19,16 @@
     padding-bottom: 4%;
 }
 
+/*cover 100% 100%*/
 .formBg {
     /* overflow: hidden; */
     padding-top: 5%;
     padding-left: 10%;
     padding-right: 10%;
+    width: 100%;
     background-image: url(../../../assets/blueBg.jpg);
     background-position: center;
-    background-size: 100% 100%; /*cover 100% 100%*/
+    background-size: 100% 100%; 
     height: 100vh;
     background-repeat: no-repeat;
     position: relative;

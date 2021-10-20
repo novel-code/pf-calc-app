@@ -9,14 +9,14 @@ const Employees = () => {
 
     return (
         // setEmployees([...EmployeesData, ])
-        <div className="mt-5" >
+        <div style={{width: "100%"}} >
                         
 
               
-            <div>
+            <div >
         {/* {props.employees.map(emp => <Employee key={emp.id} employee={emp} />)} */}
 
-            <DbEmployees ></DbEmployees>
+            <DbEmployees  ></DbEmployees>
             </div>
         
         </div>

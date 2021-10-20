@@ -1,8 +1,8 @@
-/* .navToggle {
+.navToggle {
     display: flex;
     background: rgb(117, 186, 241);
-    font-size: 18px;
-    padding: 1.5rem;
+    /* font-size: 18px;
+    padding: 1.5rem; */
     padding-bottom: 0;
   }
 
@@ -26,4 +26,4 @@
   .active {
     background-color: red;
   }
-   */
+  

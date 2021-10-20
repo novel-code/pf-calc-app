@@ -7,6 +7,7 @@ import Employees from './components/Pages/EmployeeListPage/Employees/Employees';
 import AddEmployee from "./components/Pages/AddEmpoyeePage/AddEmployee";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Popup from "./components/Navbar/Popup";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 
 
@@ -64,9 +65,12 @@ const addEmployee = (employee) => {
 
   return (
   
-    <div className="App">
+    <div className="App" >
       <BrowserRouter>
-      <Navbar  />
+      <div style={{display: "flex"}}>
+
+      <Sidebar></Sidebar>
+      {/* <Navbar  /> */}
       <Switch>
 
         <Route path="/add"  component={() => <AddEmployee onAdd={addEmployee} ></AddEmployee>}>
@@ -74,7 +78,8 @@ const addEmployee = (employee) => {
         </Route>
           <Route path="/list" component={() => <Employees  ></Employees>}></Route>
       </Switch>
-      
+       
+      </div>
       </BrowserRouter>
       
 
@@ -87,7 +92,8 @@ const addEmployee = (employee) => {
     </div>
     
     
-  );
-}
-
-export default App;
+    );
+  }
+  
+  export default App;
+  

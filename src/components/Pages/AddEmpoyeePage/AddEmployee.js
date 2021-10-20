@@ -163,7 +163,9 @@ const AddEmployee = ({ onAdd }) => {
 
 
   return (
-    <div className={styles.formBg}>
+    <div style={{width: "100%"}}>
+      
+    <div className={styles.formBg} >
       
       <div className={styles.formStyle2}>
             <form className={styles.formAdd}>
@@ -349,6 +351,8 @@ const AddEmployee = ({ onAdd }) => {
       
       {popup ? <Popup sucOrFailMsg={popMsg} logic={() =>setPopup(false)}></Popup> : ""}
 
+
+    </div>
 
     </div>
   );
