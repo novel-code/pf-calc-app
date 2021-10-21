@@ -1,9 +1,11 @@
 
+import { render } from "@testing-library/react";
 import moment from "moment";
 
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import DatePicker from "react-date-picker";
+import { useParams } from "react-router-dom";
 import Popup from "../../Navbar/Popup";
 
 import { postEmployee } from "../../Requests/PostEmployee";
@@ -22,18 +24,83 @@ const AddEmployee = ({ onAdd }) => {
   const [dojMessage, setDojMessage] = useState("")
   const [designationMessage, setDesignationMessage] = useState("")
   const [ctcMessage, setCtcMessage] = useState("")
-
   const [popup , setPopup] = useState(false);
+  const [maleC, setMaleC] =useState(false)
+  const [femaleC, setFemaleC] =useState(false)
+  const [othersC, setOthersC] =useState(false)
 
   const [popMsg, setPopMsg] = useState("")
+
+
+
+  const male = document.getElementById("formHorizontalRadios1");
+  const female = document.getElementById("formHorizontalRadios2");
+  const others = document.getElementById("formHorizontalRadios3");
+
+  const maleRef = useRef();
+  const othersRef = useRef();
+  const femaleRef = useRef();
+
+  const fetchSingleRecord =  function(id) {
+
+    if(id === undefined) return;
+
+    const axios = require('axios');
+
+    const config = {
+      method: 'get',
+      url: `http://localhost:8080/employee/single/${id}`,
+    };
+     axios(config)
+    .then(function (response) {
+
+      console.log(response.data)
+
+      const nameEdit = response.data.employee_name;
+
+      setText(nameEdit)
+
+
+      if (response.data.gender === "m") {
+      maleRef.current.checked = true;
+      } else if (response.data.gender === "f") {
+        femaleRef.current.checked = true;
+      } else {
+        othersRef.current.checked = true;
+      }
+
+      setDateOfJoin(response.data.date_of_joining)
+
+      setDesignation(response.data.designation)
+
+      setCtc(response.data.ctc)
+
+      setPf(pfAndEsiCalc(response.data.ctc)[0]);
+      setEsi(pfAndEsiCalc(response.data.ctc)[1]);
+      setTax(taxCalc(response.data.ctc));
+      
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+     
+  }
   
+
+  const id = window.location.pathname.split("_")[1]
   
+  useEffect(() => {
+    fetchSingleRecord(id)
+  }, [])
+
+
+
+
   const onSubmitHandler = function (e) {
     e.preventDefault();
 
-    const male = document.getElementById("formHorizontalRadios1");
-    const female = document.getElementById("formHorizontalRadios2");
-    const others = document.getElementById("formHorizontalRadios3");
+    
     // if (!text || !designation || !gender) {
     //   alert("Please enter all the fields");
     //   return;
@@ -162,6 +229,9 @@ const AddEmployee = ({ onAdd }) => {
   }
 
 
+  
+
+
   return (
     <div style={{width: "100%"}}>
       
@@ -202,6 +272,7 @@ const AddEmployee = ({ onAdd }) => {
                           name="formHorizontalRadios"
                           id="formHorizontalRadios1"
                           defaultChecked
+                          ref={maleRef}
                         />
                       </Col>
                       <Col className="mt-2">
@@ -211,10 +282,13 @@ const AddEmployee = ({ onAdd }) => {
                           label="Female"
                           name="formHorizontalRadios"
                           id="formHorizontalRadios2"
+                          onLoad={() => console.log("djflfh")}
+                          ref={femaleRef}
                         />
                       </Col>
                       <Col className="mt-2">
                         <Form.Check
+                        ref={othersRef}
                           type="radio"
                           value="others"
                           label="Others"
@@ -353,7 +427,6 @@ const AddEmployee = ({ onAdd }) => {
 
 
     </div>
-
     </div>
   );
 };

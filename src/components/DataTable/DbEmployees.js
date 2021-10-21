@@ -10,6 +10,7 @@ import Employees from "../Pages/EmployeeListPage/Employees/Employees";
 import styles from "./dbEmployees.module.css";
 import { deleteEmpFlag } from "../Requests/DeleteEmpFlag";
 import styleDel from "../Navbar/popup.module.css";
+import { Link } from "react-router-dom";
 
 export const DbEmployees = function () {
   const [popup, setPopup] = useState(false);
@@ -28,7 +29,7 @@ export const DbEmployees = function () {
     if (response) {
       const dbEmployees = response.data;
 
-      console.log("Employees:", dbEmployees);
+      // console.log("Employees:", dbEmployees);
       setDbEmployees(dbEmployees);
     }
   };
@@ -91,7 +92,7 @@ export const DbEmployees = function () {
         Header: "Action",
         Cell: (col) => (
           <div>
-            <EditFormBtn toEditData={col.row.original}></EditFormBtn>
+            <Link to={{ pathname: `/edit/_`+col.row.original.id }} className="btn btn-primary mx-2">Edit</Link>
             <button
               onClick={() => {
                 // setPopMsg(`Are you sure you want to delete ${col.row.original.employee_name}?`)

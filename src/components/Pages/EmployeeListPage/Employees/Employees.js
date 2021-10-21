@@ -1,7 +1,7 @@
 import { DbEmployees } from "../../../DataTable/DbEmployees";
 // import Employee from "../../../Employee/Employee";
 
-const Employees = () => {
+const Employees = (props) => {
 
     
     
@@ -18,7 +18,6 @@ const Employees = () => {
 
             <DbEmployees  ></DbEmployees>
             </div>
-        
         </div>
     )
 }

@@ -5,7 +5,7 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Employees from './components/Pages/EmployeeListPage/Employees/Employees';
 import AddEmployee from "./components/Pages/AddEmpoyeePage/AddEmployee";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, useParams } from "react-router-dom";
 import Popup from "./components/Navbar/Popup";
 import Sidebar from "./components/Sidebar/Sidebar";
 
@@ -77,6 +77,7 @@ const addEmployee = (employee) => {
 
         </Route>
           <Route path="/list" component={() => <Employees  ></Employees>}></Route>
+          <Route path="/edit/:id" component={() => <AddEmployee ></AddEmployee>}></Route>
       </Switch>
        
       </div>
