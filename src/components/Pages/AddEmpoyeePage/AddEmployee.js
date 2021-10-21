@@ -11,7 +11,7 @@ import Popup from "../../Navbar/Popup";
 import { postEmployee } from "../../Requests/PostEmployee";
 import styles from "./AddEmployee.module.css";
 
-const AddEmployee = ({ onAdd }) => {
+const AddEmployee = ({ onAdd , onEdit}) => {
   const [empName, setText] = useState("");
   const [checked, setChecked] = useState(false);
   const [dateOfJoin, setDateOfJoin] = useState("");
@@ -25,9 +25,6 @@ const AddEmployee = ({ onAdd }) => {
   const [designationMessage, setDesignationMessage] = useState("")
   const [ctcMessage, setCtcMessage] = useState("")
   const [popup , setPopup] = useState(false);
-  const [maleC, setMaleC] =useState(false)
-  const [femaleC, setFemaleC] =useState(false)
-  const [othersC, setOthersC] =useState(false)
 
   const [popMsg, setPopMsg] = useState("")
 
@@ -40,6 +37,44 @@ const AddEmployee = ({ onAdd }) => {
   const maleRef = useRef();
   const othersRef = useRef();
   const femaleRef = useRef();
+
+  console.log("onEdit:", onEdit);
+  console.log("onAdd:", onAdd)
+
+  const validationMessage = function(empName, ctc, designation, doj) {
+
+    if (empName.length < 3) {
+      setNameMessage("name should be alteast 3 charecters long");
+    } 
+
+    if (ctc < 50000) {
+      setCtcMessage("Ctc should be greater than 50000")
+    }
+    
+    if(designation === "none") {
+      setDesignationMessage("select a designation")
+    }
+
+    if(doj === "") {
+      setDojMessage("please select a date")
+    }
+
+  }
+
+  const afterSubmitAndUpdate = function (empName, dateOfJoin, designation, ctc, action, e) {
+
+    if (empName.length > 2 && (dateOfJoin !== "") && designation !== "none" && ctc > 50000) {
+                       
+      action(e);
+      setNameMessage("");
+      setDesignation("none");
+      setCtc("")
+      setDateOfJoin("")
+      document.getElementById("formHorizontalRadios1").checked = true;
+    }
+
+  }
+
 
   const fetchSingleRecord =  function(id) {
 
@@ -94,17 +129,14 @@ const AddEmployee = ({ onAdd }) => {
     fetchSingleRecord(id)
   }, [])
 
-
+  const onEditHandler = function(e) {
+    e.preventDefault();
+  }
 
 
   const onSubmitHandler = function (e) {
     e.preventDefault();
 
-    
-    // if (!text || !designation || !gender) {
-    //   alert("Please enter all the fields");
-    //   return;
-    // }
     let empGender;
 
     if (male.checked) {
@@ -354,44 +386,22 @@ const AddEmployee = ({ onAdd }) => {
                   <div style={{color:"red"}}>{ctcMessage}</div>
                 </div>
                 <div className="d-flex justify-content-around">
-                  <button
+                  {onEdit === undefined ? <button
                     className="btn btn-primary mt-3"
                     type="submit"
                     onClick={(e) => {
                       e.preventDefault();
 
-                      if (empName.length < 3) {
-                        setNameMessage("name should be alteast 3 charecters long");
-                      } 
+                      validationMessage(empName, ctc, designation, dateOfJoin)
 
-                      if (ctc < 50000) {
-                        setCtcMessage("Ctc should be greater than 50000")
-                      }
-                      
-                      if(designation === "none") {
-                        setDesignationMessage("select a designation")
-                      }
+                      afterSubmitAndUpdate(empName, dateOfJoin, designation, ctc, onSubmitHandler, e)
 
-                      if(dateOfJoin === "") {
-                        setDojMessage("please select a date")
-                      }
-                      
-
-                      // if (designation === "none") return;
-
-                      if (empName.length > 2 && (dateOfJoin !== "") && designation !== "none" && ctc > 50000) {
-                       
-                        onSubmitHandler(e);
-                        setNameMessage("");
-                        setDesignation("none");
-                        setCtc("")
-                        setDateOfJoin("")
-                        document.getElementById("formHorizontalRadios1").checked = true;
-                      }
+                     
                     }}
                   >
                     Save Employee
-                  </button>
+                  </button> : ""}
+                  
                 </div>
               </div>
               {/* <div className="d-flex  flex-column"> */}
@@ -418,7 +428,11 @@ const AddEmployee = ({ onAdd }) => {
           </div>
         </div>
             </form>
-           
+           {onEdit !== undefined ? <div className="d-flex justify-content-around"> <button onClick={(e) => {
+                                   validationMessage(empName, ctc, designation, dateOfJoin)
+                                   afterSubmitAndUpdate(empName, dateOfJoin, designation, ctc, onEditHandler, e)
+
+           }} className="btn btn-primary mt-3">edit</button> </div> : ""}
           
        
       </div>

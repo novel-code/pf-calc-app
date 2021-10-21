@@ -62,6 +62,10 @@ const addEmployee = (employee) => {
   
 }
 
+const editEmployee = () => {
+  console.log("edit or update method")
+}
+
 
   return (
   
@@ -77,7 +81,7 @@ const addEmployee = (employee) => {
 
         </Route>
           <Route path="/list" component={() => <Employees  ></Employees>}></Route>
-          <Route path="/edit/:id" component={() => <AddEmployee ></AddEmployee>}></Route>
+          <Route path="/edit/:id" component={() => <AddEmployee onEdit={editEmployee} ></AddEmployee>}></Route>
       </Switch>
        
       </div>
