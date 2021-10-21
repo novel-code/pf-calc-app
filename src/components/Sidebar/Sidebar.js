@@ -7,6 +7,9 @@ import {BsTable} from 'react-icons/bs'
 const Sidebar = function () {
     const [btnActive , setBtnActive] = useState(false);
 
+
+    
+
     return (
         <div className={styleSidebar.sidebar}>
             <div className={styleSidebar.logoDiv}>
@@ -15,10 +18,14 @@ const Sidebar = function () {
             </div>
             <div className={styleSidebar.linkDiv}>
                 
-            <Link className={styleSidebar.linkNav} style={{ fontWeight: btnActive ?"normal" : "200"}} onClick={() => setBtnActive(true)}   to={location => ({ ...location, pathname: "/add" })} ><AiOutlineUserAdd></AiOutlineUserAdd> Add</Link>
+            <Link className={`${styleSidebar.linkNav} ${window.location.pathname === '/add' ? styleSidebar.tabActive : ""}`}  onClick={(e) => {
+                setBtnActive(true)
+            }}   to={location => ({ ...location, pathname: "/add" })} ><AiOutlineUserAdd className={`${window.location.pathname === "/add" ? styleSidebar.tabLogo: ""}`} style={{fontSize: "1.3rem", marginRight: "0.5rem"}}></AiOutlineUserAdd > Add</Link>
 
         
-            <Link className={styleSidebar.linkNav}  style={{fontWeight: btnActive ? "200": "normal"}} onClick={() => setBtnActive(false)} to="/list" ><BsTable></BsTable> List</Link>
+            <Link className={`${styleSidebar.linkNav} ${window.location.pathname === '/list' ? styleSidebar.tabActive  : ""}`} onClick={(e) => {
+                setBtnActive(false)
+            }} to="/list" ><BsTable className={`${window.location.pathname === "/list" ? styleSidebar.tabLogo: ""}`} style={{fontSize: "1.3rem", marginRight: "0.5rem"}} ></BsTable> List</Link>
                
                 
 

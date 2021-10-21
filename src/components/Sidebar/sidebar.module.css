@@ -12,12 +12,14 @@
 .linkNav {
     text-decoration: none;
     padding-left: 3rem;
-    color: black;
-    padding-bottom: 2rem;
+    color: rgb(211,211,211);
+    padding-bottom: 0.7rem;
+    padding-top: 0.7rem;
 }
 
 .linkNav:hover {
-    color: black;
+    background-color: rgb(245, 245, 245);
+    color: rgb(211,211,211); 
 }
 
 .linkDiv {
@@ -38,3 +40,17 @@
     margin-right: 15px;
     
   }
+
+  .tabActive {
+    background-image: linear-gradient(to right, rgb(255, 255, 255) , rgb(198,216,247));
+    border-right: solid 5px rgb(31,100,224);
+    color: black;
+}
+
+ .tabActive:hover {
+     color: black;
+ }
+
+ .tabLogo {
+     color: rgb(31,100,224);
+ }
