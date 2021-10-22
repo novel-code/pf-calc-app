@@ -193,7 +193,13 @@ const AddEmployee = ({ onAdd, onEdit }) => {
 
       postEmpObj.date_of_joining = updateDate;
 
-      updateEmployee(postEmpObj , updateId)
+      updateEmployee(postEmpObj , updateId).then(() => {
+        setPopMsg("updated succesfully!")
+        setPopup(true)
+      }).catch(err => {
+        setPopMsg("something went wrong")
+        setPopup(true)
+      })
 
     }
 
@@ -451,7 +457,6 @@ const AddEmployee = ({ onAdd, onEdit }) => {
                     designation,
                     ctc,
                     onSubmitHandler,
-                    // onEditHandler,
                     e
                   );
                 }}
