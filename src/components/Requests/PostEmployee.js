@@ -1,7 +1,7 @@
 
 const axios = require('axios');
 
-export const postEmployee = function (insertedData) {
+export const postEmployee = async function (insertedData) {
 
     
     const data = JSON.stringify(insertedData);
@@ -15,7 +15,7 @@ export const postEmployee = function (insertedData) {
         data: data
     };
 
-    return  axios(config).then((response) => JSON.stringify(response.data))
+    return await axios(config).then((response) => JSON.stringify(response.data))
 
 
 

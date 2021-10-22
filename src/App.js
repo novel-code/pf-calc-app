@@ -70,6 +70,7 @@ const editEmployee = () => {
   return (
   
     <div className="App" >
+
       <BrowserRouter>
       <div style={{display: "flex"}}>
 

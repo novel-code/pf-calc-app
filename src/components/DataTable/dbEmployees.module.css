@@ -1,10 +1,10 @@
 
 .tableRowDb:nth-child(odd) {
-    background-color:  white;
+    background-color:  rgb(232,239,252)
 }
 
 .tableRowDb:nth-child(even) {
-    background-color: rgb(117, 186, 241);
+    background-color: rgb(208,223,248)
 }
 
 .tableRowDb:last-child {
@@ -12,16 +12,21 @@
 }
 
 .tableHeadDb {
-    
     text-align: center;
     height: 50px;
     border-bottom: solid 1px black;
-    background-color: rgb(117, 186, 241);
+    background-color:rgba(32, 99, 224, 0.651)
 }
 
 .tableRowDb {
     text-align: center;
     height: 50px;
 }
+.tableReact {
 
+    box-shadow:4px 4px 13px rgba(114, 114, 114, 0.466);
+}
 
+.tableDiv {
+    padding: 1%;
+}

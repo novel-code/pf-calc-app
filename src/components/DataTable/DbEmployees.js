@@ -124,9 +124,9 @@ export const DbEmployees = function () {
   }, []);
 
   return (
-    <div style={{width: "100%"}}>
-      <div style={{width: "100%"}}>
-      <table style={{width: "100%"}} {...getTableBodyProps()}>
+    <div className={styles.tableDiv}>
+      <div >
+      <table className={styles.tableReact} style={{width: "100%"}} {...getTableBodyProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr
@@ -173,6 +173,7 @@ export const DbEmployees = function () {
                 onClick={() => {
                   DelEmployee(idDel);
                   setDelPopup(false);
+                  setPopup(true)
                 }}
               >
                 Yes
@@ -192,6 +193,7 @@ export const DbEmployees = function () {
         ""
       )}
       </div>
+      {popup ? <Popup sucOrFailMsg="deleted successfully." logic={() => setPopup(false)}></Popup> : ""}
     </div>
   );
 };
