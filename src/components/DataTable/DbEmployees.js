@@ -2,7 +2,7 @@ import axios from "axios";
 import moment from "moment";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Row } from "react-bootstrap";
-import { useTable } from "react-table";
+import { useAsyncDebounce, useGlobalFilter, useTable } from "react-table";
 import Popup from "../Navbar/Popup";
 import AddEmployee from "../Pages/AddEmpoyeePage/AddEmployee";
 import { EditFormBtn } from "../Pages/EmployeeListPage/Employees/EditFormBtn";
@@ -11,6 +11,7 @@ import styles from "./dbEmployees.module.css";
 import { deleteEmpFlag } from "../Requests/DeleteEmpFlag";
 import styleDel from "../Navbar/popup.module.css";
 import { Link } from "react-router-dom";
+import { GlobalFilter } from "./GlobalFilter";
 
 export const DbEmployees = function () {
   const [popup, setPopup] = useState(false);
@@ -20,6 +21,7 @@ export const DbEmployees = function () {
   const [dbEmployees, setDbEmployees] = useState([]);
   const [idDel, setIdDel] = useState();
   const [toDelEmp, setToDelEmp] = useState("");
+
 
   const fetchEmployees = async () => {
     const response = await axios
@@ -32,6 +34,7 @@ export const DbEmployees = function () {
       // console.log("Employees:", dbEmployees);
       setDbEmployees(dbEmployees);
     }
+
   };
 
   const DelEmployee = function (id) {
@@ -53,12 +56,13 @@ export const DbEmployees = function () {
   };
 
   // every single render, if the data didn't change from previous render then it will be cached
-  const employeesData = useMemo(() => [...dbEmployees, dbEmployees]);
+  const employeesData = useMemo(() =>  [...dbEmployees], [dbEmployees]);
 
   const columns = useMemo(
     () => [
       {
         Header: "S.No",
+       
       },
       {
         Header: "Employee Name",
@@ -112,9 +116,10 @@ export const DbEmployees = function () {
     []
   );
 
-  const tableInstance = useTable({ columns: columns, data: employeesData });
+  const tableInstance = useTable({ columns: columns, data: employeesData }, useGlobalFilter, );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, preGlobalFilteredRows, setGlobalFilter, state } =
     tableInstance;
 
   // after the component has been mounted this fn will run
@@ -123,8 +128,23 @@ export const DbEmployees = function () {
     fetchEmployees();
   }, []);
 
+  // const [value, setValue] = useState(state.GlobalFilter)
+  // const onChange = useAsyncDebounce((value) => {
+  //     console.log(preGlobalFilteredRows)
+  //     setGlobalFilter(value || undefined )
+  // }, 300)
+
   return (
     <div className={styles.tableDiv}>
+      
+      <div>
+        {/* <input type="text" value={value || ""} onChange={(e) => {
+          onChange(e.target.value)
+          setValue(e.target.value)
+        }} /> */}
+        <GlobalFilter preGlobalFilteredRows={preGlobalFilteredRows} setGolbalFilter={setGlobalFilter} globalFilter={state.globalFilter}></GlobalFilter>
+      
+      </div>
       <div >
       <table className={styles.tableReact} style={{width: "100%"}} {...getTableBodyProps()}>
         <thead>

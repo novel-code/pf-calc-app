@@ -7,9 +7,9 @@
     background-color: rgb(208,223,248)
 }
 
-.tableRowDb:last-child {
+/* .tableRowDb:last-child {
     display: none;
-}
+} */
 
 .tableHeadDb {
     text-align: center;
