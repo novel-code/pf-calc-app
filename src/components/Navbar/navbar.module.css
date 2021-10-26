@@ -1,29 +1,23 @@
 .navToggle {
-    display: flex;
-    background: rgb(117, 186, 241);
-    /* font-size: 18px;
-    padding: 1.5rem; */
-    padding-bottom: 0;
-  }
+  display: flex;
+  background: rgb(117, 186, 241);
+  padding-bottom: 0;
+}
 
+.navHeader {
+  font-size: 22px;
+}
 
+.navLinks {
+  text-decoration: none;
+  color: black;
+  padding-left: 2rem;
+}
 
-  .navHeader {
-    font-size: 22px;
-    
-  }
-  
-  .navLinks {
-    text-decoration: none;
-    color: black;
-    padding-left: 2rem;
-  }
-  
-  .navLinks:hover {
-    color: black;
-  }
+.navLinks:hover {
+  color: black;
+}
 
-  .active {
-    background-color: red;
-  }
-  
+.active {
+  background-color: red;
+}

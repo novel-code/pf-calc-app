@@ -5,7 +5,6 @@ import logo from "../../assets/logo.jpg";
 import styleSidebar from "./sidebar.module.css";
 import { BsTable } from "react-icons/bs";
 const Sidebar = function () {
-
   return (
     <div className={styleSidebar.sidebar}>
       <div className={styleSidebar.logoDiv}>

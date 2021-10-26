@@ -1,32 +1,26 @@
-
 .tableRowDb:nth-child(odd) {
-    background-color:  rgb(232,239,252)
+  background-color: rgb(232, 239, 252);
 }
 
 .tableRowDb:nth-child(even) {
-    background-color: rgb(208,223,248)
+  background-color: rgb(208, 223, 248);
 }
 
-/* .tableRowDb:last-child {
-    display: none;
-} */
-
 .tableHeadDb {
-    text-align: center;
-    height: 50px;
-    border-bottom: solid 1px black;
-    background-color:rgba(32, 99, 224, 0.651)
+  text-align: center;
+  height: 50px;
+  border-bottom: solid 1px black;
+  background-color: rgba(32, 99, 224, 0.651);
 }
 
 .tableRowDb {
-    text-align: center;
-    height: 50px;
+  text-align: center;
+  height: 50px;
 }
 .tableReact {
-
-    box-shadow:4px 4px 13px rgba(114, 114, 114, 0.466);
+  box-shadow: 4px 4px 13px rgba(114, 114, 114, 0.466);
 }
 
 .tableDiv {
-    padding: 1%;
+  padding: 1%;
 }
