@@ -13,18 +13,16 @@
 }
 
 .searchDiv {
-  width: 350px;
-  /* background-color: rgb(247, 199, 199); */
   display: flex;
   border-radius: 10px;
-  /* background-color: yellow; */
   margin: 20px;
-  /* padding: 5px; */
+  /* margin-left: 0; */
+  justify-content: space-between;
 }
 
 .searchTextDiv {
   padding-right: 15px;
-  padding-left: 15px;
+  /* padding-left: 15px; */
   padding-top: 4px;
 }
 
@@ -37,8 +35,8 @@
 }
 
 .searchDiv input {
-  border: solid 2px rgb(155, 155, 252);
-  border-radius: 10px;
+  border: solid 2px rgba(32, 99, 224, 0.651);
+  border-radius: 7px;
 }
 
 /* .searchInputDiv {

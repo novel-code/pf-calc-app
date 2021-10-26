@@ -8,8 +8,6 @@ const Sidebar = function () {
     const [btnActive , setBtnActive] = useState(false);
 
 
-    
-
     return (
         <div className={styleSidebar.sidebar}>
             <div className={styleSidebar.logoDiv}>
@@ -19,12 +17,12 @@ const Sidebar = function () {
             <div className={styleSidebar.linkDiv}>
                 
             <Link className={`${styleSidebar.linkNav} ${window.location.pathname === '/add' ? styleSidebar.tabActive : ""}`}  onClick={(e) => {
-                setBtnActive(true)
+                setBtnActive(false)
             }}   to={location => ({ ...location, pathname: "/add" })} ><AiOutlineUserAdd className={`${window.location.pathname === "/add" ? styleSidebar.tabLogo: ""}`} style={{fontSize: "1.3rem", marginRight: "0.5rem"}}></AiOutlineUserAdd > Add</Link>
 
         
             <Link className={`${styleSidebar.linkNav} ${window.location.pathname === '/list' ? styleSidebar.tabActive  : ""}`} onClick={(e) => {
-                setBtnActive(false)
+                setBtnActive(true)
             }} to="/list" ><BsTable className={`${window.location.pathname === "/list" ? styleSidebar.tabLogo: ""}`} style={{fontSize: "1.3rem", marginRight: "0.5rem"}} ></BsTable> List</Link>
                
                 

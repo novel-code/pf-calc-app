@@ -24,17 +24,14 @@
 /*cover 100% 100%*/
 .formBg {
     /* overflow: hidden; */
-    padding-top: 5%;
+    padding-top: 7%;
     padding-left: 10%;
     padding-right: 10%;
     width: 100%;
-    /* background-image: url(../../../assets/blueBg.jpg); */
     background-position: center;
     background-size: 100% 100%; 
     height: 100vh;
     background-repeat: no-repeat;
     position: relative;
     background-attachment: fixed;
-  
-  
   }

@@ -2,7 +2,7 @@ import axios from "axios";
 import moment from "moment";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Row } from "react-bootstrap";
-import { useAsyncDebounce, useGlobalFilter, useTable } from "react-table";
+import { useAsyncDebounce, useGlobalFilter, useSortBy, useTable } from "react-table";
 import Popup from "../Navbar/Popup";
 import AddEmployee from "../Pages/AddEmpoyeePage/AddEmployee";
 import { EditFormBtn } from "../Pages/EmployeeListPage/Employees/EditFormBtn";
@@ -62,11 +62,14 @@ export const DbEmployees = function () {
     () => [
       {
         Header: "S.No",
-       
+        // accessor: "id",
+        disableSortBy: true,
       },
       {
         Header: "Employee Name",
         accessor: "employee_name",
+        // disableSortBy: true
+
       },
       {
         Header: "Gender",
@@ -83,6 +86,7 @@ export const DbEmployees = function () {
         Header: "Date of joining",
         accessor: "date_of_joining",
         Cell: (col) => moment(col.value).format("DD-MMM-yy"),
+        
       },
       {
         Header: "Designation",
@@ -116,7 +120,7 @@ export const DbEmployees = function () {
     []
   );
 
-  const tableInstance = useTable({ columns: columns, data: employeesData }, useGlobalFilter, );
+  const tableInstance = useTable({ columns: columns, data: employeesData }, useGlobalFilter, useSortBy );
 
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, preGlobalFilteredRows, setGlobalFilter, state } =
@@ -154,7 +158,7 @@ export const DbEmployees = function () {
               {...headerGroup.getHeaderGroupProps()}
             >
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render("Header")} {column.isSorted ? (column.isSortedDesc ? "▼" : "▲") : ""}</th>
               ))}
             </tr>
           ))}
