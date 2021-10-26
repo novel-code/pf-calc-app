@@ -1,4 +1,3 @@
-
 import { render } from "@testing-library/react";
 import axios from "axios";
 import moment from "moment";
@@ -7,6 +6,7 @@ import { forwardRef, useEffect, useRef, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import DatePicker from "react-date-picker";
 import { useParams } from "react-router-dom";
+import Select from "react-select";
 import Popup from "../../Navbar/Popup";
 
 import { postEmployee } from "../../Requests/PostEmployee";
@@ -30,7 +30,7 @@ const AddEmployee = ({ onAdd, onEdit }) => {
   const [updateDP, setUpdateDP] = useState(false);
 
   const [popMsg, setPopMsg] = useState("");
-  const [updateDate, setUpdateDate] = useState("")
+  const [updateDate, setUpdateDate] = useState("");
 
   const male = document.getElementById("formHorizontalRadios1");
   const female = document.getElementById("formHorizontalRadios2");
@@ -38,6 +38,23 @@ const AddEmployee = ({ onAdd, onEdit }) => {
   const maleRef = useRef();
   const othersRef = useRef();
   const femaleRef = useRef();
+
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
+  ]
+
+  const colourStyles = { 
+   option: (_,{data}) => {
+     console.log(data.value)
+
+     return {
+       cursor: "pointer",
+       color: data.value === 'vanilla' ? 'red' : ""
+     }
+   }
+  }
 
   const validationMessage = function (empName, ctc, designation, doj) {
     if (empName.length < 3) {
@@ -110,8 +127,8 @@ const AddEmployee = ({ onAdd, onEdit }) => {
         setPf(pfAndEsiCalc(response.data.ctc)[0]);
         setEsi(pfAndEsiCalc(response.data.ctc)[1]);
         setTax(taxCalc(response.data.ctc));
-        setUpdateDate(response.data.date_of_joining)
-      setUpdateDP(true)
+        setUpdateDate(response.data.date_of_joining);
+        setUpdateDP(true);
       })
       .catch(function (error) {
         console.log(error);
@@ -167,46 +184,41 @@ const AddEmployee = ({ onAdd, onEdit }) => {
     //   esi,
     //   tax,
     // });
-    
-    const editUrl = window.location.pathname.split("/")[1]
 
-    if(window.location.pathname === "/add") {
+    const editUrl = window.location.pathname.split("/")[1];
 
-      postEmployee(postEmpObj).then(function () {
-
-        setPopMsg("Employee Record added successfully!");
-        setPopup(true);
+    if (window.location.pathname === "/add") {
+      postEmployee(postEmpObj)
+        .then(function () {
+          setPopMsg("Employee Record added successfully!");
+          setPopup(true);
         })
         .catch(function (error) {
-  
           setPopMsg("Oops! Something went wrong.");
           setPopup(true);
         });
 
-      console.log("add")
-
-    } else if(editUrl === "edit") {
-
-      const updateId = window.location.pathname.split("/")[2].replace("_", "")
+      console.log("add");
+    } else if (editUrl === "edit") {
+      const updateId = window.location.pathname.split("/")[2].replace("_", "");
 
       postEmpObj.id = updateId;
 
       postEmpObj.date_of_joining = updateDate;
 
-      updateEmployee(postEmpObj , updateId).then(() => {
-        setPopMsg("updated succesfully!")
-        setPopup(true)
-      }).catch(err => {
-        setPopMsg("something went wrong")
-        setPopup(true)
-      })
-
+      updateEmployee(postEmpObj, updateId)
+        .then(() => {
+          setPopMsg("updated succesfully!");
+          setPopup(true);
+        })
+        .catch((err) => {
+          setPopMsg("something went wrong");
+          setPopup(true);
+        });
     }
 
     setText("");
   };
-
-
 
   const allowCtc = function (e) {
     const ctcVal = e.target.value.replace(/[^0-9]/gi, "");
@@ -328,23 +340,30 @@ const AddEmployee = ({ onAdd, onEdit }) => {
 
                   <div>
                     <label>Date of Joining:</label>
-                    {updateDP ? <input value={updateDate} type="date" onChange={(date) => setUpdateDate(date.target.value)}></input> : <DatePicker
-                      
-                      onInput={(e) => validDateInput(e)}
-                      maxDate={new Date()}
-                      id="doj"
-                      dayPlaceholder="DD"
-                      monthPlaceholder="MM"
-                      yearPlaceholder="YYY"
-                      value={dateOfJoin}
-                      onChange={(dateOfJoin) => {
-                        console.log(dateOfJoin);
-                        setDojMessage("");
-                        setDateOfJoin(dateOfJoin);
-                      }}
-                      className="mx-3"
-                    ></DatePicker>}
-                    
+                    {updateDP ? (
+                      <input
+                        value={updateDate}
+                        type="date"
+                        onChange={(date) => setUpdateDate(date.target.value)}
+                      ></input>
+                    ) : (
+                      <DatePicker
+                        onInput={(e) => validDateInput(e)}
+                        maxDate={new Date()}
+                        id="doj"
+                        dayPlaceholder="DD"
+                        monthPlaceholder="MM"
+                        yearPlaceholder="YYY"
+                        value={dateOfJoin}
+                        onChange={(dateOfJoin) => {
+                          console.log(dateOfJoin);
+                          setDojMessage("");
+                          setDateOfJoin(dateOfJoin);
+                        }}
+                        className="mx-3"
+                      ></DatePicker>
+                    )}
+
                     {/* <input type="date" onInput={(e) => validDateInput(e)} value={dateOfJoin} ></input> */}
                     <div style={{ color: "red" }}>{dojMessage}</div>
                   </div>
@@ -369,6 +388,9 @@ const AddEmployee = ({ onAdd, onEdit }) => {
                       <option value="Cyber Security">Cyber Security</option>
                       <option value="Dev Ops">Dev Ops</option>
                     </Form.Select>
+                    <div>
+                      <Select styles={colourStyles} options={options}></Select>
+                    </div>
                     <div style={{ color: "red" }}>{designationMessage}</div>
                   </div>
                   <div className="mt-3">
@@ -390,8 +412,6 @@ const AddEmployee = ({ onAdd, onEdit }) => {
                         type="submit"
                         onClick={(e) => {
                           e.preventDefault();
-                         
-
 
                           validationMessage(
                             empName,
@@ -399,8 +419,6 @@ const AddEmployee = ({ onAdd, onEdit }) => {
                             designation,
                             dateOfJoin
                           );
-
-
 
                           afterSubmitAndUpdate(
                             empName,
@@ -410,8 +428,6 @@ const AddEmployee = ({ onAdd, onEdit }) => {
                             onSubmitHandler,
                             e
                           );
-
-
                         }}
                       >
                         Save Employee

@@ -15,13 +15,17 @@ export const GlobalFilter = function ({
     }, 300)
 
     return (  
-        <div>
-            <p>Search:</p>
+        <div className="searchDiv">
+            <div className="searchTextDiv">
+Search:
+            </div>
+            <div className="searchInputDiv">
             <input type="text" value={value || ""} onChange={(e) => {
                 
                 setValue(e.target.value)
                 onChange(e.target.value)
             }} placeholder={`${count} records...`} ></input>
+            </div>
         </div> 
     )
 
