@@ -41,16 +41,11 @@
     
   }
 
-  .tabActive {
-    background-image: linear-gradient(to right, rgb(255, 255, 255) , rgb(198,216,247));
+ .selected {
+     background-image: linear-gradient(to right, rgb(255, 255, 255) , rgb(198,216,247));
     border-right: solid 5px rgb(31,100,224);
-    color: black;
-}
-
- .tabActive:hover {
-     color: black;
+    color: rgb(31,100,224);
  }
-
- .tabLogo {
-     color: rgb(31,100,224);
+ .selected:hover {
+    color: rgb(31,100,224);
  }

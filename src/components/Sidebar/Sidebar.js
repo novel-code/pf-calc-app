@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import logo from '../../assets/logo.jpg'
 import styleSidebar from './sidebar.module.css'
@@ -15,15 +15,11 @@ const Sidebar = function () {
             <img className={styleSidebar.logoImg}  src={logo}></img>
             </div>
             <div className={styleSidebar.linkDiv}>
-                
-            <Link className={`${styleSidebar.linkNav} ${window.location.pathname === '/add' ? styleSidebar.tabActive : ""}`}  onClick={(e) => {
-                setBtnActive(false)
-            }}   to={location => ({ ...location, pathname: "/add" })} ><AiOutlineUserAdd className={`${window.location.pathname === "/add" ? styleSidebar.tabLogo: ""}`} style={{fontSize: "1.3rem", marginRight: "0.5rem"}}></AiOutlineUserAdd > Add</Link>
+
+            <NavLink className={styleSidebar.linkNav} activeClassName={styleSidebar.selected} to={location => ({ ...location, pathname: "/add" })} ><AiOutlineUserAdd style={{fontSize: "1.3rem", marginRight: "0.5rem"}}></AiOutlineUserAdd > Add</NavLink>
 
         
-            <Link className={`${styleSidebar.linkNav} ${window.location.pathname === '/list' ? styleSidebar.tabActive  : ""}`} onClick={(e) => {
-                setBtnActive(true)
-            }} to="/list" ><BsTable className={`${window.location.pathname === "/list" ? styleSidebar.tabLogo: ""}`} style={{fontSize: "1.3rem", marginRight: "0.5rem"}} ></BsTable> List</Link>
+            <NavLink className={styleSidebar.linkNav} activeClassName={styleSidebar.selected} to="/list" ><BsTable style={{fontSize: "1.3rem", marginRight: "0.5rem"}} ></BsTable> List</NavLink>
                
                 
 
