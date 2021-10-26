@@ -2,20 +2,15 @@
 import { useState } from "react";
 
 import './App.css';
-import Navbar from './components/Navbar/Navbar';
 import Employees from './components/Pages/EmployeeListPage/Employees/Employees';
 import AddEmployee from "./components/Pages/AddEmpoyeePage/AddEmployee";
-import { BrowserRouter, Route, Switch, useParams } from "react-router-dom";
-import Popup from "./components/Navbar/Popup";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Sidebar from "./components/Sidebar/Sidebar";
 
 
 
 
 function App() {
-  const [showAddEmployeeComponent, setShowAddEmployeeComponent] = useState(true);
-  const [showEmpList, setShowEmpList] = useState(false);
-  const [fetchData, setFetchData] = useState(false)
   const [EmployeesData, setEmployees] = useState([
     {
         id: 1,

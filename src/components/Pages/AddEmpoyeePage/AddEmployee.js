@@ -1,21 +1,15 @@
-import { render } from "@testing-library/react";
-import axios from "axios";
-import moment from "moment";
-
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import DatePicker from "react-date-picker";
-import { useParams } from "react-router-dom";
 import Select from "react-select";
 import Popup from "../../Navbar/Popup";
-
+import moment from "moment";
 import { postEmployee } from "../../Requests/PostEmployee";
 import { updateEmployee } from "../../Requests/UpdateEmployee";
 import styles from "./AddEmployee.module.css";
 
-const AddEmployee = ({ onAdd, onEdit }) => {
+const AddEmployee = ({ onEdit }) => {
   const [empName, setText] = useState("");
-  const [checked, setChecked] = useState(false);
   const [dateOfJoin, setDateOfJoin] = useState("");
   const [designation, setDesignation] = useState(() => "none");
   const [ctc, setCtc] = useState("");
@@ -40,21 +34,21 @@ const AddEmployee = ({ onAdd, onEdit }) => {
   const femaleRef = useRef();
 
   const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ]
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
 
-  const colourStyles = { 
-   option: (_,{data}) => {
-     console.log(data.value)
+  const colourStyles = {
+    option: (_, { data }) => {
+      console.log(data.value);
 
-     return {
-       cursor: "pointer",
-       color: data.value === 'vanilla' ? 'red' : ""
-     }
-   }
-  }
+      return {
+        cursor: "pointer",
+        color: data.value === "vanilla" ? "red" : "",
+      };
+    },
+  };
 
   const validationMessage = function (empName, ctc, designation, doj) {
     if (empName.length < 3) {
@@ -139,7 +133,7 @@ const AddEmployee = ({ onAdd, onEdit }) => {
 
   useEffect(() => {
     fetchSingleRecord(id);
-  }, []);
+  });
 
   const onSubmitHandler = function (e) {
     e.preventDefault();
@@ -147,13 +141,10 @@ const AddEmployee = ({ onAdd, onEdit }) => {
     let empGender;
 
     if (male.checked) {
-      setChecked(true);
       empGender = male.value;
     } else if (female.checked) {
-      setChecked(true);
       empGender = female.value;
     } else {
-      setChecked(true);
       empGender = others.value;
     }
 
@@ -173,17 +164,6 @@ const AddEmployee = ({ onAdd, onEdit }) => {
       pf: `${esi}`,
       tax: `${formTax}`,
     };
-
-    // onAdd({
-    //   empName,
-    //   gender: [empGender, checked],
-    //   dateOfJoin,
-    //   designation,
-    //   ctc,
-    //   pf,
-    //   esi,
-    //   tax,
-    // });
 
     const editUrl = window.location.pathname.split("/")[1];
 

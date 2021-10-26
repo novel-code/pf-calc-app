@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import { DbEmployees } from '../DataTable/DbEmployees';
-import Employees from '../Pages/EmployeeListPage/Employees/Employees';
 import { deleteEmpFlag } from '../Requests/DeleteEmpFlag';
 import styles from './popup.module.css';
 

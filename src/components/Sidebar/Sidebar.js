@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import logo from "../../assets/logo.jpg";
@@ -9,7 +9,7 @@ const Sidebar = function () {
   return (
     <div className={styleSidebar.sidebar}>
       <div className={styleSidebar.logoDiv}>
-        <img className={styleSidebar.logoImg} src={logo}></img>
+        <img alt="logo" className={styleSidebar.logoImg} src={logo}></img>
       </div>
       <div className={styleSidebar.linkDiv}>
         <NavLink
