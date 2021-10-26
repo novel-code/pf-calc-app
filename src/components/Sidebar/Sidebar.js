@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import logo from "../../assets/logo.jpg";
 import styleSidebar from "./sidebar.module.css";
 import { BsTable } from "react-icons/bs";
 const Sidebar = function () {
-  const [btnActive, setBtnActive] = useState(false);
 
   return (
     <div className={styleSidebar.sidebar}>
