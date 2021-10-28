@@ -7,6 +7,10 @@ import styles from "./dbEmployees.module.css";
 import styleDel from "../Navbar/popup.module.css";
 import { Link } from "react-router-dom";
 import { GlobalFilter } from "./GlobalFilter";
+import {VscChevronDown ,VscChevronUp} from "react-icons/vsc"
+
+import { MdDelete } from "react-icons/md";
+import { AiFillEdit } from "react-icons/ai";
 
 export const DbEmployees = function () {
   const [popup, setPopup] = useState(false);
@@ -90,23 +94,22 @@ export const DbEmployees = function () {
         Header: "Action",
         Cell: (col) => (
           <div>
-            <Link
+            <Link style={{color: "rgb(0,123,255)", fontSize: "1.2rem"}}
               to={{ pathname: `/edit/_` + col.row.original.id }}
-              className="btn btn-primary mx-2"
+              className="btn mx-2"
             >
-              Edit
+              <AiFillEdit></AiFillEdit>
             </Link>
-            <button
+            <button style={{color: "rgb(220,54,68)", fontSize: "1.2rem"}}
               onClick={() => {
                 // setPopMsg(`Are you sure you want to delete ${col.row.original.employee_name}?`)
                 // setPopup(true);
                 setIdDel(col.row.original.id);
                 setDelPopup(true);
                 setToDelEmp(col.row.original.employee_name);
-              }}
-              className="btn btn-danger"
-            >
-              Delete
+              }} className="btn" >
+              <MdDelete></MdDelete>
+
             </button>
           </div>
         ),
@@ -134,7 +137,7 @@ export const DbEmployees = function () {
   // after the component has been mounted this fn will run
   useEffect(() => {
     fetchEmployees();
-  }, []);
+  },[]);
 
   return (
     <div className={styles.tableDiv}>
@@ -160,7 +163,7 @@ export const DbEmployees = function () {
                 {headerGroup.headers.map((column) => (
                   <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                     {column.render("Header")}{" "}
-                    {column.isSorted ? (column.isSortedDesc ? "▼" : "▲") : ""}
+                    {column.isSorted ? (column.isSortedDesc ? <VscChevronDown style={{fontSize: "1.2rem"}}></VscChevronDown> : <VscChevronUp  style={{fontSize: "1.2rem"}}></VscChevronUp>) : ""}
                   </th>
                 ))}
               </tr>

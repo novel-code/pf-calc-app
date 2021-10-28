@@ -15,7 +15,7 @@ const Navbar = ({ title, btnOneName, btnTwoName }) => {
         </div>
 
         <div style={{ paddingTop: "0.2rem" }}>
-          <Link
+          {/* <Link
             className={styles.navLinks}
             style={{ fontWeight: btnActive ? "normal" : "200" }}
             onClick={() => setBtnActive(true)}
@@ -30,7 +30,7 @@ const Navbar = ({ title, btnOneName, btnTwoName }) => {
             to="/list"
           >
             {btnTwoName}
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

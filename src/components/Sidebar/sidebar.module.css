@@ -1,5 +1,5 @@
 .logoImg {
-  width: 80px;
+  width: 50px;
 }
 
 .logoDiv {
@@ -9,7 +9,8 @@
 
 .linkNav {
   text-decoration: none;
-  padding-left: 3rem;
+  text-align: center;
+  /* padding-left: 3rem; */
   color: rgb(211, 211, 211);
   padding-bottom: 0.7rem;
   padding-top: 0.7rem;
@@ -28,13 +29,13 @@
 
 .sidebar {
   height: 100vh;
-  width: 360px;
+  width: 200px;
   background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
-  border-top-right-radius: 15px;
+  /* border-top-right-radius: 15px; */
   border-bottom-right-radius: 15px;
-  box-shadow: 5px 5px 7px rgb(224, 224, 224);
+  box-shadow: 5px 3px 5px rgb(224, 224, 224);
 }
 
 .selected {
@@ -49,3 +50,4 @@
 .selected:hover {
   color: rgb(31, 100, 224);
 }
+

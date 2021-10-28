@@ -10,7 +10,8 @@
   text-align: center;
   height: 50px;
   border-bottom: solid 1px black;
-  background-color: rgba(32, 99, 224, 0.651);
+  /* background-color: rgba(32, 99, 224, 0.651); */
+  background-color: rgb(159, 193, 252);
 }
 
 .tableRowDb {

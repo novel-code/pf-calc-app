@@ -133,7 +133,7 @@ const AddEmployee = ({ onEdit }) => {
 
   useEffect(() => {
     fetchSingleRecord(id);
-  });
+  }, []);
 
   const onSubmitHandler = function (e) {
     e.preventDefault();
@@ -368,9 +368,9 @@ const AddEmployee = ({ onEdit }) => {
                       <option value="Cyber Security">Cyber Security</option>
                       <option value="Dev Ops">Dev Ops</option>
                     </Form.Select>
-                    <div>
+                    {/* <div>
                       <Select styles={colourStyles} options={options}></Select>
-                    </div>
+                    </div> */}
                     <div style={{ color: "red" }}>{designationMessage}</div>
                   </div>
                   <div className="mt-3">

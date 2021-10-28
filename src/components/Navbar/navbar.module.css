@@ -1,11 +1,18 @@
 .navToggle {
   display: flex;
-  background: rgb(117, 186, 241);
+  box-shadow: 13px 4px 10px rgba(114, 114, 114, 0.466);
+  /* background-color: rgb(159, 193, 252); */
+  /* background-color: rgb(136, 179, 255); */
+  /* background-color: rgb(103, 125, 248); */
   padding-bottom: 0;
+  /* margin-left: 1%; */
 }
 
 .navHeader {
   font-size: 22px;
+  padding-left: 50px;
+  padding-top: 10px;
+  /* color: white; */
 }
 
 .navLinks {
