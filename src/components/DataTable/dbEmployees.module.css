@@ -7,7 +7,7 @@
 }
 
 .tableHeadDb {
-  text-align: center;
+  /* text-align: center; */
   height: 50px;
   border-bottom: solid 1px black;
   /* background-color: rgba(32, 99, 224, 0.651); */
@@ -15,7 +15,7 @@
 }
 
 .tableRowDb {
-  text-align: center;
+  /* text-align: center; */
   height: 50px;
 }
 .tableReact {
@@ -24,4 +24,8 @@
 
 .tableDiv {
   padding: 1%;
+}
+
+.dojAndAction {
+  text-align: center;
 }

@@ -8,11 +8,13 @@ import styleDel from "../Navbar/popup.module.css";
 import { Link } from "react-router-dom";
 import { GlobalFilter } from "./GlobalFilter";
 import {VscChevronDown ,VscChevronUp} from "react-icons/vsc"
-
+import {BsInfoCircle} from "react-icons/bs"
 import { MdDelete } from "react-icons/md";
 import { AiFillEdit } from "react-icons/ai";
 
 export const DbEmployees = function () {
+  const [empInfo, setEmpInfo] = useState("")
+  const [displayInfo, setDisplayInfo] = useState(false)
   const [popup, setPopup] = useState(false);
   const [delPopup, setDelPopup] = useState(false);
 
@@ -57,9 +59,9 @@ export const DbEmployees = function () {
   const columns = useMemo(
     () => [
       {
-        Header: "S.No",
-        // accessor: "id",
-        disableSortBy: true,
+        Header: "ID",
+        accessor: "id",
+        // disableSortBy: true,
       },
       {
         Header: "Employee Name",
@@ -92,11 +94,20 @@ export const DbEmployees = function () {
       },
       {
         Header: "Action",
+      
         Cell: (col) => (
-          <div>
+          <div >
+            <button className="btn" style={{color: "rgb(24,162,184)"}} onClick={() => {
+              
+              setEmpInfo(col.row.original)
+              setDisplayInfo(true)
+              setPopup(true)
+            }}>
+              <BsInfoCircle></BsInfoCircle>
+            </button>
             <Link style={{color: "rgb(0,123,255)", fontSize: "1.2rem"}}
               to={{ pathname: `/edit/_` + col.row.original.id }}
-              className="btn mx-2"
+              className="btn"
             >
               <AiFillEdit></AiFillEdit>
             </Link>
@@ -105,6 +116,7 @@ export const DbEmployees = function () {
                 // setPopMsg(`Are you sure you want to delete ${col.row.original.employee_name}?`)
                 // setPopup(true);
                 setIdDel(col.row.original.id);
+                setDisplayInfo(false)
                 setDelPopup(true);
                 setToDelEmp(col.row.original.employee_name);
               }} className="btn" >
@@ -148,36 +160,48 @@ export const DbEmployees = function () {
           globalFilter={state.globalFilter}
         ></GlobalFilter>
       </div>
-      <div>
+      <div >
         <table
           className={styles.tableReact}
           style={{ width: "100%" }}
           {...getTableBodyProps()}
         >
-          <thead>
+          {/* {style={{textAlign: headerGroup.headers[6].Header === "Action" ? "center" : "left"}}} */}
+
+          <thead >
             {headerGroups.map((headerGroup) => (
-              <tr
+              <tr 
                 className={styles.tableHeadDb}
                 {...headerGroup.getHeaderGroupProps()}
+                
               >
+          
+                
+                
                 {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  <th  {...column.getHeaderProps(column.getSortByToggleProps())}>
+                    <span style={{paddingLeft: "15px"}} ></span>
+
                     {column.render("Header")}{" "}
                     {column.isSorted ? (column.isSortedDesc ? <VscChevronDown style={{fontSize: "1.2rem"}}></VscChevronDown> : <VscChevronUp  style={{fontSize: "1.2rem"}}></VscChevronUp>) : ""}
+                   
                   </th>
                 ))}
               </tr>
             ))}
           </thead>
+
           <tbody {...getTableBodyProps()}>
+              
             {rows.map((row, idxr) => {
               prepareRow(row);
 
               return (
                 <tr className={styles.tableRowDb} {...row.getRowProps()}>
                   {row.cells.map((cell, idx) => (
-                    <td {...cell.getCellProps()}>
-                      {idx === 0 ? cell.render(idxr + 1) : cell.render("Cell")}
+                    <td style={{paddingLeft: "15px"}} {...cell.getCellProps()}>
+                      {/* {idx === 0 ? cell.render(idxr + 1) : cell.render("Cell")} */}
+                      {cell.render("Cell")}
                     </td>
                   ))}
                 </tr>
@@ -227,6 +251,8 @@ export const DbEmployees = function () {
       {popup ? (
         <Popup
           sucOrFailMsg="deleted successfully."
+          info={empInfo}
+          disp={displayInfo}
           logic={() => setPopup(false)}
         ></Popup>
       ) : (

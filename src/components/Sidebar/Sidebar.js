@@ -10,14 +10,15 @@ const Sidebar = function () {
   const [sidebar, setSidebar] = useState(false)
   return (
     <div>
-     <div style={{textAlign: "center", paddingTop: "16px", paddingBottom: "17px" }}>
-        
-        <button style={{backgroundColor: "white"}} onClick={() => setSidebar(!sidebar)}>{sidebar ? <GrMenu></GrMenu> : <GrClose></GrClose>}</button>
-        </div>
+     
       
    
-    <div className={styleSidebar.sidebar} style={{width: sidebar ? "90px" : "", transition: "0.3s"}}>
-      <div className={styleSidebar.logoDiv}>
+    <div className={styleSidebar.sidebar} style={{width: sidebar ? "80px" : "", transition: "0.3s"}}>
+        <div style={{textAlign: "center", paddingTop: "15px"}}>
+        <button style={{backgroundColor: "white"}} onClick={() => setSidebar(!sidebar)}>{sidebar ? <GrMenu></GrMenu> : <GrClose></GrClose>}</button>
+     
+        </div>
+         <div className={styleSidebar.logoDiv}>
         <img alt="logo" className={styleSidebar.logoImg} src={logo}></img>
       </div>
     
