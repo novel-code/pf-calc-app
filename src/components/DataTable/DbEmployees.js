@@ -82,7 +82,7 @@ export const DbEmployees = function () {
       {
         Header: "Date of joining",
         accessor: "date_of_joining",
-        Cell: (col) => moment(col.value).format("DD-MMM-yy"),
+        Cell: (col) => moment(col.value).format("MMM-DD-yy"),
       },
       {
         Header: "Designation",
