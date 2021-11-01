@@ -1,7 +1,7 @@
 import axios from "axios";
 import moment from "moment";
 import { useEffect, useMemo, useState } from "react";
-import { useGlobalFilter, useSortBy, useTable } from "react-table";
+import { useGlobalFilter, useSortBy, useTable , usePagination } from "react-table";
 import Popup from "../Navbar/Popup";
 import styles from "./dbEmployees.module.css";
 import styleDel from "../Navbar/popup.module.css";
@@ -11,6 +11,7 @@ import {VscChevronDown ,VscChevronUp} from "react-icons/vsc"
 import {BsInfoCircle} from "react-icons/bs"
 import { MdDelete } from "react-icons/md";
 import { AiFillEdit } from "react-icons/ai";
+import { GrPrevious , GrNext} from "react-icons/gr";
 
 export const DbEmployees = function () {
   const [empInfo, setEmpInfo] = useState("")
@@ -131,16 +132,31 @@ export const DbEmployees = function () {
   );
 
   const tableInstance = useTable(
-    { columns: columns, data: employeesData },
+    { columns: columns, data: employeesData , initialState: {pageIndex: 0} },
     useGlobalFilter,
-    useSortBy
+    useSortBy,
+    usePagination
   );
 
   const {
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
+    getTableProps, // pagination (start)
+    getTableBodyProps, // (pag n normal)
+    headerGroups,      // (pag n normal)
+    prepareRow,        // (pag n normal)
+    rows,              // replaces rows with page
+
+    page, //Instead of using 'rows', we'll use page, 
+    //(which has only the rows for the active page)
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state: { pageIndex, pageSize }, // pagination (end)
+  
     preGlobalFilteredRows,
     setGlobalFilter,
     state,
@@ -151,14 +167,19 @@ export const DbEmployees = function () {
     fetchEmployees();
   },[]);
 
+
   return (
+       
+     
     <div className={styles.tableDiv}>
+     
       <div>
         <GlobalFilter
           preGlobalFilteredRows={preGlobalFilteredRows}
           setGolbalFilter={setGlobalFilter}
           globalFilter={state.globalFilter}
         ></GlobalFilter>
+        
       </div>
       <div >
         <table
@@ -193,7 +214,7 @@ export const DbEmployees = function () {
 
           <tbody {...getTableBodyProps()}>
               
-            {rows.map((row, idxr) => {
+            {page.map((row, idxr) => {
               prepareRow(row);
 
               return (
@@ -210,6 +231,56 @@ export const DbEmployees = function () {
           </tbody>
           {console.log("rendering")}
         </table>
+        <div className="pagination">
+        <span>
+          Page{' '}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>{' '}
+        </span>
+         <div >
+         {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{'<<'}</button> */}
+          <button style={{backgroundColor: "white"}} onClick={() => previousPage()} disabled={!canPreviousPage}>
+          {/* <GrPrevious></GrPrevious> */}
+          Previous
+        </button>
+        <button style={{backgroundColor: "white"}} onClick={() => nextPage()} disabled={!canNextPage}>
+         {/* <GrNext></GrNext> */}
+        Next
+        </button>
+        {/* <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {'>>'}
+        </button> */}
+         </div>
+       
+        <span>
+          | Go to page:{' '}
+          <input
+            type="number"
+            defaultValue={pageIndex + 1}
+            onChange={e => {
+              const page = e.target.value ? Number(e.target.value) - 1 : 0
+              gotoPage(page)
+            }}
+            style={{ width: '100px', outline: "solid 2px rgba(32, 99, 224, 0.651)", borderRadius: "5px" }}
+      
+          />
+        </span>
+        <select
+          style={{ outline: "solid 2px rgba(32, 99, 224, 0.651)", borderRadius: "5px" }}
+          value={pageSize}
+          onChange={e => {
+            setPageSize(Number(e.target.value))
+          }}
+        >
+          {[10, 20, 30, 40, 50].map(pageSize => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+       
+        </div>
         {delPopup ? (
           <div
             onClick={(e) => {
@@ -259,5 +330,6 @@ export const DbEmployees = function () {
         ""
       )}
     </div>
+
   );
 };

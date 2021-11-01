@@ -9,7 +9,7 @@ const Navbar = ({ title, btnOneName, btnTwoName }) => {
     <div>
       <div className={styles.navToggle}>
         <div>
-          <p style={{ cursor: "default" }} className={styles.navHeader}>
+          <p style={{ cursor: "default" , marginLeft: "2rem"}} className={styles.navHeader}>
             {title}
           </p>
         </div>

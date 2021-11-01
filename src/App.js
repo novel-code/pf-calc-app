@@ -8,6 +8,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [menu, setMenu] = useState(false)
   const [EmployeesData, setEmployees] = useState([
     {
       id: 1,
