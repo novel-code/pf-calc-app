@@ -5,8 +5,10 @@ import Employees from "./components/Pages/EmployeeListPage/Employees/Employees";
 import AddEmployee from "./components/Pages/AddEmpoyeePage/AddEmployee";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Sidebar from "./components/Sidebar/Sidebar";
+import BasicLogin from "./components/Pages/BasicLogin/BasicLogin";
 
 function App() {
+  const [token , setToken] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [menu, setMenu] = useState(false)
   const [EmployeesData, setEmployees] = useState([
@@ -29,6 +31,27 @@ function App() {
       designation: "Full Stack ",
     },
   ]);
+
+  const basicLoginFn = function (pass, userId) {
+
+    if (pass && userId) {
+
+      setToken(true)
+    }
+
+  }
+
+  if(!token) {
+    return (
+      <BrowserRouter>
+        <Switch>
+           {/* <Route component={() => (<BasicLogin submitFn={basicLoginFn}  /> */}
+         <Route path="/" component={() => <BasicLogin submitFn={basicLoginFn}  /> }></Route>
+        </Switch>
+      </BrowserRouter>
+    )
+     
+  }
 
   // Add Employee page
   let newEmployee;
@@ -60,6 +83,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+
 {/* 
 <div style={{display: "flex", boxShadow: "4px 4px 13px rgba(114, 114, 114, 0.466)" , fontSize: "22px",  paddingLeft: "50px",  paddingTop: "10px"}}>
   <button style={{marginRight: "2rem"}} onClick={() => setSidebarOpen(!sidebarOpen)}>toggle</button>
@@ -74,20 +98,20 @@ function App() {
             
             <Navbar  />
             <Switch>
-              <Route
+              <Route exact
                 path="/add"
                 component={() => (
                   <AddEmployee onAdd={addEmployee}></AddEmployee>
                 )}
               ></Route>
-              <Route
+              <Route exact
                 path="/list"
                 component={() => <Employees></Employees>}
               ></Route>
-              <Route
+              <Route exact
                 path="/edit/:id"
                 component={() => (
-                  <AddEmployee onEdit={editEmployee}></AddEmployee>
+                  <AddEmployee  onEdit={editEmployee}></AddEmployee>
                 )}
               ></Route>
             </Switch>

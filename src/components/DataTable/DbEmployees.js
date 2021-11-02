@@ -267,7 +267,7 @@ export const DbEmployees = function () {
           />
         </span>
         <select
-          style={{ outline: "solid 2px rgba(32, 99, 224, 0.651)", borderRadius: "5px" }}
+          style={{ outline: "none" }}
           value={pageSize}
           onChange={e => {
             setPageSize(Number(e.target.value))

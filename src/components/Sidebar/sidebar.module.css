@@ -1,5 +1,6 @@
 .logoImg {
   width: 50px;
+  filter: saturate(150%);
 }
 
 .logoDiv {
