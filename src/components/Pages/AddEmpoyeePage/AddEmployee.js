@@ -347,7 +347,7 @@ const AddEmployee = ({ onEdit }) => {
                     {/* <input type="date" onInput={(e) => validDateInput(e)} value={dateOfJoin} ></input> */}
                     <div style={{ color: "red" }}>{dojMessage}</div>
                   </div>
-                  <div style={{width: "auto", paddingTop: "1rem", paddingBottom: "1rem" }}>
+                  {/* <div style={{width: "auto", paddingTop: "1rem", paddingBottom: "1rem" }}>
 
                  <div >
                     <div style={{  height: "1px", backgroundColor: "white", borderRadius: "5px"}}>
@@ -356,13 +356,18 @@ const AddEmployee = ({ onEdit }) => {
                  Select an image
                      </div>
 
-                    <input onChange={(e) => console.log(new Blob([e.target.value], {type: "image"}))} style={{width: "100%", opacity: "0",zIndex: "4"}}   id="uploadImage" type="file" accept='image/*'/>
+                    <input onClick={(e) => {
+                      console.log(e.target);
+
+                      
+                      
+                    }} style={{width: "100%", opacity: "0",zIndex: "4"}}   id="uploadImage" type="file" accept='image/*'/>
                     </div>
                  </div>
 
-                  </div>
+                  </div> */}
 
-                  <div className="mt-4">
+                  <div className="mt-3">
                     <label>Designation:</label>
                     <Form.Select
                       value={designation}

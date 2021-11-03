@@ -179,7 +179,7 @@ export const DbEmployees = function () {
           setGolbalFilter={setGlobalFilter}
           globalFilter={state.globalFilter}
         ></GlobalFilter>
-        
+
       </div>
       <div >
         <table
@@ -229,7 +229,7 @@ export const DbEmployees = function () {
               );
             })}
           </tbody>
-          {console.log("rendering")}
+          {console.log("rendering", preGlobalFilteredRows.length)}
         </table>
         <div className="pagination">
         <span>
@@ -273,11 +273,17 @@ export const DbEmployees = function () {
             setPageSize(Number(e.target.value))
           }}
         >
-          {[10, 20, 30, 40, 50].map(pageSize => (
-            <option key={pageSize} value={pageSize}>
+          {console.log(pageSize)}
+          { [10, 20, 30, 40, 50].map(pageSize => {
+
+            if (pageSize >= preGlobalFilteredRows.length + 10) return               
+            
+            return (<option key={pageSize} value={pageSize}>
               Show {pageSize}
             </option>
-          ))}
+          )}
+          
+          )}
         </select>
        
         </div>
