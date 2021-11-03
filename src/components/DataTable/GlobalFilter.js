@@ -26,13 +26,14 @@ export const GlobalFilter = function ({
               setValue(e.target.value);
               onChange(e.target.value);
             }}
+            placeholder={`${count} records...`} 
           ></input>
         </div>
-        {/* placeholder={`${count} records...`}  */}
+        
       </div>
-      <div>
+      {/* <div>
         <p style={{ whiteSpace: "nowrap" }}> {count} records...</p>
-      </div>
+      </div> */}
     </div>
   );
 };
