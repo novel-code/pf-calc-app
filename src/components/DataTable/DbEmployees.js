@@ -189,9 +189,9 @@ export const DbEmployees = function () {
         >
           {/* {style={{textAlign: headerGroup.headers[6].Header === "Action" ? "center" : "left"}}} */}
 
-          <thead >
+          <thead className="tHeadList" >
             {headerGroups.map((headerGroup) => (
-              <tr 
+              <tr className="tRowList"
                 className={styles.tableHeadDb}
                 {...headerGroup.getHeaderGroupProps()}
                 
@@ -218,9 +218,9 @@ export const DbEmployees = function () {
               prepareRow(row);
 
               return (
-                <tr className={styles.tableRowDb} {...row.getRowProps()}>
+                <tr className="tRowList" {...row.getRowProps()}>
                   {row.cells.map((cell, idx) => (
-                    <td style={{paddingLeft: "15px"}} {...cell.getCellProps()}>
+                    <td className="tDataList" style={{paddingLeft: "15px"}} {...cell.getCellProps()}>
                       {/* {idx === 0 ? cell.render(idxr + 1) : cell.render("Cell")} */}
                       {cell.render("Cell")}
                     </td>

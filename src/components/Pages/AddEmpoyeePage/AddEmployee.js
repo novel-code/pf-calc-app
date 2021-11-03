@@ -347,27 +347,49 @@ const AddEmployee = ({ onEdit }) => {
                     {/* <input type="date" onInput={(e) => validDateInput(e)} value={dateOfJoin} ></input> */}
                     <div style={{ color: "red" }}>{dojMessage}</div>
                   </div>
-                  {/* <div style={{width: "auto", paddingTop: "1rem", paddingBottom: "1rem" }}>
 
-                 <div >
-                    <div style={{  height: "1px", backgroundColor: "white", borderRadius: "5px"}}>
-                     <div style={{zIndex: "0", marginBottom: "-25px", border: "solid 1px rgb(179, 179, 179)", padding: "5px", borderRadius: "5px", backgroundColor: "white"}}>
+                  <div
+                    style={{
+                      width: "auto",
+                      paddingTop: "1rem",
+                      paddingBottom: "1rem",
+                    }}
+                  >
+                    <div>
+                      <div
+                        style={{
+                          height: "1px",
+                          backgroundColor: "white",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            zIndex: "0",
+                            marginBottom: "-25px",
+                            border: "solid 1px rgb(179, 179, 179)",
+                            padding: "5px",
+                            borderRadius: "5px",
+                            backgroundColor: "white",
+                          }}
+                        >
+                          Upload profile image
+                        </div>
 
-                 Select an image
-                     </div>
-
-                    <input onClick={(e) => {
-                      console.log(e.target);
-
-                      
-                      
-                    }} style={{width: "100%", opacity: "0",zIndex: "4"}}   id="uploadImage" type="file" accept='image/*'/>
+                        <input
+                          onClick={(e) => {
+                            console.log(e.target);
+                          }}
+                          style={{ width: "100%", opacity: "0", zIndex: "4" }}
+                          id="uploadImage"
+                          type="file"
+                          accept="image/*"
+                        />
+                      </div>
                     </div>
-                 </div>
+                  </div>
 
-                  </div> */}
-
-                  <div className="mt-3">
+                  <div className="mt-4">
                     <label>Designation:</label>
                     <Form.Select
                       value={designation}
