@@ -273,7 +273,6 @@ export const DbEmployees = function () {
             setPageSize(Number(e.target.value))
           }}
         >
-          {console.log(pageSize)}
           { [10, 20, 30, 40, 50].map(pageSize => {
 
             if (pageSize >= preGlobalFilteredRows.length + 10) return               

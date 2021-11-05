@@ -25,6 +25,7 @@ const AddEmployee = ({ onEdit }) => {
 
   const [popMsg, setPopMsg] = useState("");
   const [updateDate, setUpdateDate] = useState("");
+  const [profileImg, setProfileImg] = useState();
 
   const male = document.getElementById("formHorizontalRadios1");
   const female = document.getElementById("formHorizontalRadios2");
@@ -163,6 +164,7 @@ const AddEmployee = ({ onEdit }) => {
       esi: `${pf}`,
       pf: `${esi}`,
       tax: `${formTax}`,
+      profile_img: "text" // {profileImg}
     };
 
     const editUrl = window.location.pathname.split("/")[1];
@@ -377,8 +379,17 @@ const AddEmployee = ({ onEdit }) => {
                         </div>
 
                         <input
-                          onClick={(e) => {
-                            console.log(e.target);
+                          onChange={(e) => {
+
+                            const file = e.target.files[0];
+                            const blob = new Blob([JSON.stringify(file)], {type: 'image'})
+
+                            setProfileImg(e.target.files[0])
+                
+    console.log(typeof(blob));
+// reader.readAsArrayBuffer(e.target.files[0]);
+
+                            console.log(blob)
                           }}
                           style={{ width: "100%", opacity: "0", zIndex: "4" }}
                           id="uploadImage"
