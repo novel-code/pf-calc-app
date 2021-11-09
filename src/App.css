@@ -126,26 +126,31 @@
   /* Label the data */
 
   .tDataList:nth-of-type(1):before {
-    content: "S.No:";
+    content: "Id";
   }
-  .tDataList:nth-of-type(2):before {
-    content: "Employee Name";
+  .tDataList:nth-of-type(2)::before {
+    content: "Img";
   }
   .tDataList:nth-of-type(3):before {
-    content: "Gender";
+    content: "Employee Name";
   }
   .tDataList:nth-of-type(4):before {
-    content: "Date of joining";
+    content: "Gender";
   }
   .tDataList:nth-of-type(5):before {
-    content: "Designation";
+    content: "Date of joining";
   }
   .tDataList:nth-of-type(6):before {
+    content: "Designation";
+  }
+  .tDataList:nth-of-type(7):before {
     content: "CTC";
   }
-  .tDataList:nth-of-type(7)::before {
+  .tDataList:nth-of-type(8)::before {
     content: "Action";
   }
+
+
 }
 
 .toggleBtnDiv {
