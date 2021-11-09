@@ -29,6 +29,9 @@ export const DbEmployees = function () {
       .catch((err) => console.log(err));
 
     if (response) {
+
+      console.log(response.data)
+
       const dbEmployees = response.data;
 
       // console.log("Employees:", dbEmployees);
@@ -63,6 +66,12 @@ export const DbEmployees = function () {
         Header: "ID",
         accessor: "id",
         // disableSortBy: true,
+      },
+      {
+        Header: "Img",
+        Cell: (col) => (
+          <img src={col.row.original.profile_img} style={{width: "30px", height: "30px", borderRadius: "50%"}}></img>
+        )
       },
       {
         Header: "Employee Name",

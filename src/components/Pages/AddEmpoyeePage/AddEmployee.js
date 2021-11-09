@@ -22,11 +22,11 @@ const AddEmployee = ({ onEdit }) => {
   const [ctcMessage, setCtcMessage] = useState("");
   const [popup, setPopup] = useState(false);
   const [updateDP, setUpdateDP] = useState(false);
-
+  const [imgMesssage, setImgMessage] = useState("Upload profile image")
   const [popMsg, setPopMsg] = useState("");
   const [updateDate, setUpdateDate] = useState("");
   const [profileImg, setProfileImg] = useState();
-
+  const [imgMsgColor, setImgMsgColor] = useState("#333");
   const male = document.getElementById("formHorizontalRadios1");
   const female = document.getElementById("formHorizontalRadios2");
   const others = document.getElementById("formHorizontalRadios3");
@@ -67,6 +67,12 @@ const AddEmployee = ({ onEdit }) => {
     if (doj === "") {
       setDojMessage("please select a date");
     }
+
+    if ( profileImg === undefined ) {
+      setImgMsgColor("red")
+      setImgMessage("Please select an image")
+    }
+
   };
 
   const afterSubmitAndUpdate = function (
@@ -81,12 +87,14 @@ const AddEmployee = ({ onEdit }) => {
       empName.length > 2 &&
       dateOfJoin !== "" &&
       designation !== "none" &&
-      ctc > 50000
+      ctc > 50000 && 
+      profileImg !== undefined 
     ) {
       action(e);
       setNameMessage("");
       setDesignation("none");
       setCtc("");
+      setImgMessage("Upload profile image")
       setDateOfJoin("");
       document.getElementById("formHorizontalRadios1").checked = true;
     }
@@ -164,7 +172,7 @@ const AddEmployee = ({ onEdit }) => {
       esi: `${pf}`,
       pf: `${esi}`,
       tax: `${formTax}`,
-      profile_img: "text" // {profileImg}
+      profile_img: `${profileImg}`
     };
 
     const editUrl = window.location.pathname.split("/")[1];
@@ -373,23 +381,44 @@ const AddEmployee = ({ onEdit }) => {
                             padding: "5px",
                             borderRadius: "5px",
                             backgroundColor: "white",
+                            color: imgMsgColor
                           }}
                         >
-                          Upload profile image
+                          {imgMesssage}
                         </div>
 
                         <input
                           onChange={(e) => {
 
+
                             const file = e.target.files[0];
-                            const blob = new Blob([JSON.stringify(file)], {type: 'image'})
 
-                            setProfileImg(e.target.files[0])
-                
-    console.log(typeof(blob));
-// reader.readAsArrayBuffer(e.target.files[0]);
+                            if (file === undefined) {
+                              setImgMsgColor("red")
+                              setImgMessage("Please select an image")
+                              return
+                            }
 
-                            console.log(blob)
+                            const reader = new FileReader();
+                            reader.onloadend = function () {
+
+                             if (reader.result.length < 64000) { // 64 kib
+
+                                // console.log( "less than 64 kib", reader.result.length);
+                                setImgMsgColor("black")
+                                setImgMessage(e.target.files[0].name)
+                                setProfileImg(reader.result)
+
+                              } else {
+                                setImgMsgColor("red")
+                                setImgMessage("Please select an image less than 64kib")
+                                
+                              }
+
+                            }
+                            reader.readAsDataURL(file)
+
+
                           }}
                           style={{ width: "100%", opacity: "0", zIndex: "4" }}
                           id="uploadImage"
