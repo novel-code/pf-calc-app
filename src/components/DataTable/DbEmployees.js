@@ -241,13 +241,14 @@ export const DbEmployees = function () {
           {console.log("rendering", preGlobalFilteredRows.length)}
         </table>
         <div className="pagination">
+          <div className="footerMobile">
         <span>
           Page{' '}
           <strong>
             {pageIndex + 1} of {pageOptions.length}
           </strong>{' '}
         </span>
-         <div >
+        <div>
          {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{'<<'}</button> */}
           <button style={{backgroundColor: "white"}} onClick={() => previousPage()} disabled={!canPreviousPage}>
           {/* <GrPrevious></GrPrevious> */}
@@ -257,10 +258,16 @@ export const DbEmployees = function () {
          {/* <GrNext></GrNext> */}
         Next
         </button>
+       
+
+        </div>
+
         {/* <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
           {'>>'}
         </button> */}
          </div>
+
+         <div className="footerMobile">
        
         <span>
           | Go to page:{' '}
@@ -293,7 +300,7 @@ export const DbEmployees = function () {
           
           )}
         </select>
-       
+       </div>
         </div>
         {delPopup ? (
           <div

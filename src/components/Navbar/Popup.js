@@ -4,11 +4,14 @@ import styles from "./popup.module.css";
 const Popup = function ({ logic, sucOrFailMsg, cancelBtn, id, info, disp }) {
   return (
     <div className={styles.modal}>
+     
       <div className={styles.modalContent} style={{ width: "400px" }}>
+      
         {/* <p>{sucOrFailMsg}</p> */}
         <div>
           {disp ? (
             <div>
+              <button>edit</button>
               <div style={{paddingBottom: "20px"}}><img style={{width: "70px", height: "70px", borderRadius: "50%"}} src={info.profile_img}></img></div>
               <div className="row">
                 <div className="col" style={{ textAlign: "left" }}>

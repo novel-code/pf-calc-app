@@ -48,7 +48,6 @@
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   box-shadow: 5px 3px 7px rgb(224, 224, 224);
-  
 }
 
 .mobileViewDiv {
@@ -60,7 +59,6 @@
 }
 
 @media only screen and (max-width: 600px) {
-  
   .mobileViewDiv {
     display: block;
   }
@@ -73,31 +71,48 @@
     z-index: 99;
     position: fixed;
   }
+}
 
+
+.footerMobile {
+  display: flex;
 
 }
 
+
 .tRowList:nth-child(odd) {
-    background-color: rgb(232, 239, 252);
-  }
-  
-  .tRowList:nth-child(even) {
-    background-color: rgb(208, 223, 248);
-  }
-  /* .tRowList {
+  background-color: rgb(232, 239, 252);
+}
+
+.tRowList:nth-child(even) {
+  background-color: rgb(208, 223, 248);
+}
+/* .tRowList {
     /* text-align: center; 
     height: 50px;
   } */
 
-
 @media screen and (max-width: 600px) {
+  .pagination {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 1px;
+    z-index: 999;
+    background-color: white;
+    width: 100%;
+    border-radius: 10px;
+  }
 
+  .footerMobile {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
 
-  /* table thead {
-    overflow: hidden;
-    position: absolute;
-    width: 0px;
-  } */
+  .footerMobile:first-child {
+    border-bottom: dashed 1px rgb(193, 198, 204);
+  }
 
   .tHeadList {
     overflow: hidden;
@@ -108,7 +123,6 @@
   .tRowList {
     border-bottom: 3px solid #ddd;
   }
-
 
   .tDataList {
     border-bottom: 1px solid #ddd;
@@ -149,12 +163,9 @@
   .tDataList:nth-of-type(8)::before {
     content: "Action";
   }
-
-
 }
 
 .toggleBtnDiv {
   left: 95%;
   position: absolute;
 }
-
